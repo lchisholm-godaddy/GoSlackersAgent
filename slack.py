@@ -3,33 +3,39 @@ import os
 import io
 import json
 import requests
-from typing import List, Dict
+from typing import List, Dict, Optional
 import matplotlib.pyplot as plt
-from utils import get_now_str
+from dotenv import load_dotenv
+from datetime import datetime
 
-SLACK_APP_TOKEN = "xoxb-9194967619826-9195284375778-miH73Owan31ItmdrK1DDrVqP"
-SLACK_APP_CHANNEL = "#general"
+load_dotenv()
+
+SLACK_APP_CHANNEL = os.getenv("SLACK_APP_CHANNEL")
+SLACK_APP_TOKEN = os.getenv("SLACK_APP_TOKEN")
+
+def get_now_str():
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # Base function to send messages to Slack. It's just hitting the endpoint with the token and channel
-def post_message_to_slack(text: str, blocks: List[Dict[str, str]] = None):
-    print(os.getenv(SLACK_APP_TOKEN))
+def post_message_to_slack(text: str, blocks: Optional[List[Dict[str, str]]] = None):
+    print(os.getenv("SLACK_APP_TOKEN"))
     return requests.post('https://slack.com/api/chat.postMessage', {
-        'token': os.getenv(SLACK_APP_TOKEN),
-        'channel': os.getenv(SLACK_APP_CHANNEL),
+        'token': os.getenv("SLACK_APP_TOKEN"),
+        'channel': os.getenv("SLACK_APP_CHANNEL"),
         'text': text,
         'blocks': json.dumps(blocks) if blocks else None
     }).json()	
 
 # Same function as above, but insted of just text, it sends files through slack.
 def post_file_to_slack(
-  text: str, file_name: str, file_bytes: bytes, file_type: str = None, title: str = None
+  text: str, file_name: str, file_bytes: bytes, file_type: Optional[str] = None, title: Optional[str] = None
 ):
     return requests.post(
       'https://slack.com/api/files.upload', 
       {
-        'token': os.getenv(SLACK_APP_TOKEN),
+        'token': os.getenv("SLACK_APP_TOKEN"),
         'filename': file_name,
-        'channels': os.getenv(SLACK_APP_CHANNEL),
+        'channels': os.getenv("SLACK_APP_CHANNEL"),
         'filetype': file_type,
         'initial_comment': text,
         'title': title
@@ -41,7 +47,7 @@ def post_matplotlib_to_slack():
     buf = io.BytesIO()
     plt.savefig(buf, format='png', facecolor="white")
     buf.seek(0)
-    post_file_to_slack("", "", buf)
+    post_file_to_slack("", "", buf.getvalue())
 
 # Custom functions using Block Kit to structure the messages sent to Slack
 # Process start
