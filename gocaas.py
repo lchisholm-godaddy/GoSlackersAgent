@@ -6,8 +6,36 @@ from dotenv import load_dotenv
 # Import WebClient from Python SDK (github.com/slackapi/python-slack-sdk)
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+from slack_bolt import App
+from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 load_dotenv()
+
+app = App(token=os.environ["SLACK_BOT_TOKEN"])
+
+@app.event("app_mention")
+def handle_app_mention(event, say):
+    user = event["user"]
+    global text
+    text = event["text"]
+    say(f"Hi <@{user}>, working on an answer for your question {text}...")
+    analyze_slack_channel()
+    response = call_godaddy_api()
+    say(f"Here's an answer for your question {text}: {response}")
+    
+
+@app.event("message")
+def handle_dm(event, say):
+    # Only run in DMs (channel_type == 'im')
+    if event.get("channel_type") == "im" and event.get("subtype") is None:
+        user = event["user"]
+        global text
+        text = event["text"]
+        say(f"Hi <@{user}>, working on an answer for your question {text}...")
+        analyze_slack_channel()
+        response = call_godaddy_api()
+        say(f"Here's an answer for your question {text}: {response}")
+
 
 # Global variable to store the formatted Slack response
 slack_response = ""
@@ -37,8 +65,6 @@ def analyze_slack_channel():
             print(slack_response)
             return
             
-        conversation_history = []
-
         channel_id = "C09669L640H"
         client.conversations_join(channel=channel_id)
         result = client.conversations_history(channel=channel_id)
@@ -154,7 +180,7 @@ def call_godaddy_api():
     }
     
     payload = {
-        "prompt": f"Question: What food are they serving tomorrow in the Tempe office? Context: {slack_response}",
+        "prompt": f"Question: {text} Context: {slack_response}",
         "provider": "openai_chat",
         "providerOptions": {
             "model": "gpt-3.5-turbo"
@@ -176,22 +202,26 @@ def call_godaddy_api():
             print("\n" + "="*60)
             print("Response:")
             print(data.get('data', {}).get('value', 'No response value found'))
+            global godaddy_response
+            godaddy_response = data.get('data', {}).get('value', 'No response value found')
+            return godaddy_response
         else:
             print(f"Error: {response.status_code} - {response.text}")
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred during the API call: {e}")
 
-def main():
-    """Main function to run both methods."""
-    print("=== SLACK CHANNEL ANALYSIS ===")
-    analyze_slack_channel()
+# def main():
+#     """Main function to run both methods."""
+#     print("=== SLACK CHANNEL ANALYSIS ===")
+#     analyze_slack_channel()
     
-    print("\n" + "="*60)
-    print("=== GODADDY API CALL ===")
-    print("="*60)
+#     print("\n" + "="*60)
+#     print("=== GODADDY API CALL ===")
+#     print("="*60)
     
-    call_godaddy_api()
+#     call_godaddy_api()
 
 if __name__ == "__main__":
-    main()
+    handler = SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"])
+    handler.start()
