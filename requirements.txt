@@ -1,4 +1,4 @@
 slack-sdk>=3.21.0
-python-dotenv>=1.0.0
-matplotlib>=3.9.0
-requests>=2.25.0 
+python-dotenv>=1.0.0 
+matplotlib>=3.5.0
+slack-bolt>=1.14.0 
