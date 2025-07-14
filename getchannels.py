@@ -53,11 +53,12 @@ class Channel:
 class SlackDataExtractor:
     """Main class for extracting and processing Slack data"""
     
-    def __init__(self, bot_token: str):
+    def __init__(self, bot_token: str, load_users: bool = False):
         self.client = WebClient(token=bot_token)
         self.channels: Dict[str, Channel] = {}
         self.messages: List[Message] = []
         self.users: Dict[str, str] = {}  # user_id -> username mapping
+        self.load_users = load_users
         
     def get_users(self) -> Dict[str, str]:
         """Get all users and create id -> username mapping"""
@@ -105,27 +106,47 @@ class SlackDataExtractor:
         """Join all available channels"""
         joined_channels = []
         failed_channels = []
+        already_member = []
+        private_channels = []
         
         for channel in channels:
-            if not channel.is_member and not channel.is_private:
-                try:
-                    self.client.conversations_join(channel=channel.id)
-                    joined_channels.append(channel.name)
-                    logger.info(f"Joined channel: #{channel.name}")
-                    time.sleep(1)  # Rate limiting
-                except SlackApiError as e:
-                    failed_channels.append(f"#{channel.name}: {e}")
-                    logger.warning(f"Failed to join #{channel.name}: {e}")
+            # Check if bot is already a member
+            if channel.is_member:
+                already_member.append(channel.name)
+                logger.debug(f"Already member of #{channel.name}, skipping")
+                continue
+            
+            # Check if channel is private
+            if channel.is_private:
+                private_channels.append(channel.name)
+                logger.debug(f"#{channel.name} is private, cannot join")
+                continue
+            
+            # Try to join the channel
+            try:
+                logger.info(f"Attempting to join #{channel.name}...")
+                self.client.conversations_join(channel=channel.id)
+                joined_channels.append(channel.name)
+                logger.info(f"✅ Successfully joined #{channel.name}")
+                time.sleep(1)  # Rate limiting
+            except SlackApiError as e:
+                failed_channels.append(f"#{channel.name}: {e}")
+                logger.warning(f"❌ Failed to join #{channel.name}: {e}")
         
-        logger.info(f"Successfully joined {len(joined_channels)} channels")
+        # Summary logging
+        logger.info(f"Channel membership summary:")
+        logger.info(f"  - Already member: {len(already_member)} channels")
+        logger.info(f"  - Successfully joined: {len(joined_channels)} channels")
+        logger.info(f"  - Private (cannot join): {len(private_channels)} channels")
         if failed_channels:
-            logger.warning(f"Failed to join {len(failed_channels)} channels")
+            logger.warning(f"  - Failed to join: {len(failed_channels)} channels")
             
         return joined_channels
     
     def extract_channel_messages(self, channel_id: str, limit: int = 1000) -> List[Message]:
         """Extract all messages and threads from a specific channel"""
         messages = []
+        thread_parents_found = 0
         
         try:
             # Get channel history
@@ -143,8 +164,13 @@ class SlackDataExtractor:
                     
                     # If this is a thread parent, get all replies
                     if message.is_thread_parent:
+                        thread_parents_found += 1
                         thread_messages = self._extract_thread_replies(channel_id, message.timestamp)
+                        logger.debug(f"Found thread parent in #{channel_name} with {len(thread_messages)} replies")
                         messages.extend(thread_messages)
+                        
+            if thread_parents_found > 0:
+                logger.info(f"#{channel_name}: Found {thread_parents_found} thread parents")
                         
         except SlackApiError as e:
             logger.error(f"Error extracting messages from channel {channel_id}: {e}")
@@ -178,8 +204,11 @@ class SlackDataExtractor:
     def _parse_message(self, msg_data: Dict[str, Any], channel_id: str, channel_name: str) -> Optional[Message]:
         """Parse raw message data into Message object"""
         user_id = msg_data.get("user", "")
-        username = self.users.get(user_id, user_id) if user_id else "Unknown"
-        username = username if username else "Unknown"
+        if self.load_users:
+            username = self.users.get(user_id, user_id) if user_id else "Unknown"
+            username = username if username else "Unknown"
+        else:
+            username = f"user_{user_id[:8]}" if user_id else "Unknown"
         
         text = msg_data.get("text", "")
         if not text and msg_data.get("subtype") == "bot_message":
@@ -191,7 +220,12 @@ class SlackDataExtractor:
             
         thread_ts = msg_data.get("thread_ts")
         ts = msg_data.get("ts", "")
-        is_thread_parent = bool(thread_ts and thread_ts == ts)
+        reply_count = msg_data.get("reply_count", 0)
+        
+        # A message is a thread parent if:
+        # 1. It has thread_ts equal to its own ts, OR
+        # 2. It has replies (reply_count > 0)
+        is_thread_parent = bool((thread_ts and thread_ts == ts) or reply_count > 0)
         
         return Message(
             id=ts,
@@ -205,7 +239,7 @@ class SlackDataExtractor:
             subtype=msg_data.get("subtype"),
             thread_ts=thread_ts,
             is_thread_parent=is_thread_parent,
-            reply_count=msg_data.get("reply_count", 0),
+            reply_count=reply_count,
             reactions=msg_data.get("reactions", []),
             attachments=msg_data.get("attachments", [])
         )
@@ -301,15 +335,17 @@ class SlackDataExtractor:
         
         return relevant_messages[:limit]
     
-    def generate_llm_context(self, messages: List[Message], query: str = "") -> str:
+    def generate_llm_context(self, messages: List[Message], query: str = "", minimal: bool = True) -> str:
         """Generate structured context for LLM processing"""
         context = {
             "search_query": query,
             "total_messages": len(messages),
             "channels_included": list(set(msg.channel_name for msg in messages)),
-            "date_range": self._get_date_range(messages),
             "conversations": []
         }
+        
+        if not minimal:
+            context["date_range"] = self._get_date_range(messages)
         
         # Group messages by channel and thread
         channel_groups: Dict[str, Dict[str, Any]] = {}
@@ -337,26 +373,31 @@ class SlackDataExtractor:
             
             # Add standalone messages
             for msg in sorted(channel_data["standalone"], key=lambda x: x.timestamp):
-                channel_context["standalone_messages"].append({
-                    "user": msg.username,
-                    "timestamp": self._format_timestamp(msg.timestamp),
-                    "text": msg.text,
-                    "has_thread": msg.is_thread_parent
-                })
+                msg_data = {"text": msg.text}
+                if not minimal:
+                    msg_data.update({
+                        "user": msg.username,
+                        "timestamp": self._format_timestamp(msg.timestamp),
+                        "has_thread": msg.is_thread_parent
+                    })
+                channel_context["standalone_messages"].append(msg_data)
             
             # Add threads
             for thread_ts, thread_messages in channel_data["threads"].items():
                 thread_context = {
-                    "thread_id": thread_ts,
                     "messages": []
                 }
+                if not minimal:
+                    thread_context["thread_id"] = thread_ts
                 
                 for msg in sorted(thread_messages, key=lambda x: x.timestamp):
-                    thread_context["messages"].append({
-                        "user": msg.username,
-                        "timestamp": self._format_timestamp(msg.timestamp),
-                        "text": msg.text
-                    })
+                    msg_data = {"text": msg.text}
+                    if not minimal:
+                        msg_data.update({
+                            "user": msg.username,
+                            "timestamp": self._format_timestamp(msg.timestamp)
+                        })
+                    thread_context["messages"].append(msg_data)
                 
                 channel_context["threads"].append(thread_context)
             
@@ -430,11 +471,12 @@ def main():
         logger.error("SLACK_BOT_TOKEN environment variable not set")
         return
     
-    extractor = SlackDataExtractor(token)
+    extractor = SlackDataExtractor(token, load_users=False)  # Don't load users by default
     
-    # Step 1: Get users mapping
-    logger.info("Fetching users...")
-    extractor.users = extractor.get_users()
+    # Step 1: Get users mapping (optional)
+    if extractor.load_users:
+        logger.info("Fetching users...")
+        extractor.users = extractor.get_users()
     
     # Step 2: Get all channels
     logger.info("Fetching channels...")
@@ -472,20 +514,14 @@ def main():
     
     # Step 6: Generate LLM context
     logger.info("Generating LLM context...")
-    llm_context = extractor.generate_llm_context(filtered_messages, "")
+    llm_context = extractor.generate_llm_context(filtered_messages, "", minimal=True)
     
     # Step 7: Save results
     with open("slack_data.json", "w") as f:
         f.write(llm_context)
     
-    # Step 8: Generate summary
-    summary = extractor.get_channel_summary(filtered_messages)
-    with open("slack_summary.json", "w") as f:
-        json.dump(summary, f, indent=2)
-    
     logger.info("Data extraction complete!")
     logger.info(f"LLM context saved to slack_data.json")
-    logger.info(f"Summary saved to slack_summary.json")
     
     # Example search
     search_query = "deployment issue"

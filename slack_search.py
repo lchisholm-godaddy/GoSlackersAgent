@@ -13,13 +13,13 @@ from getchannels import SlackDataExtractor, Message, Channel
 class SlackSearchInterface:
     """High-level interface for Slack search operations"""
     
-    def __init__(self, bot_token: Optional[str] = None):
+    def __init__(self, bot_token: Optional[str] = None, load_users: bool = False):
         """Initialize the search interface"""
         self.bot_token = bot_token or os.environ.get("SLACK_BOT_TOKEN")
         if not self.bot_token:
             raise ValueError("SLACK_BOT_TOKEN environment variable not set")
         
-        self.extractor = SlackDataExtractor(self.bot_token)
+        self.extractor = SlackDataExtractor(self.bot_token, load_users=load_users)
         self.channels: List[Channel] = []
         self.all_messages: List[Message] = []
         self.is_data_loaded = False
@@ -28,9 +28,10 @@ class SlackSearchInterface:
         """Initialize the search interface by loading data from all channels"""
         print("🔄 Initializing Slack data...")
         
-        # Load users
-        print("📥 Fetching users...")
-        self.extractor.users = self.extractor.get_users()
+        # Load users (optional)
+        if self.extractor.load_users:
+            print("📥 Fetching users...")
+            self.extractor.users = self.extractor.get_users()
         
         # Load channels
         print("📥 Fetching channels...")
@@ -172,9 +173,9 @@ class SlackSearchInterface:
         
         return self.extractor.get_channel_summary(self.all_messages)
     
-    def generate_llm_context(self, search_results: List[Message], query: str = "") -> str:
+    def generate_llm_context(self, search_results: List[Message], query: str = "", minimal: bool = True) -> str:
         """Generate LLM-ready context from search results"""
-        return self.extractor.generate_llm_context(search_results, query)
+        return self.extractor.generate_llm_context(search_results, query, minimal=minimal)
     
     def find_relevant_channels(self, query: str, limit: int = 5) -> List[Dict[str, Any]]:
         """Find channels most relevant to a query"""
@@ -209,15 +210,19 @@ class SlackSearchInterface:
     
     def _format_message_result(self, message: Message) -> Dict[str, Any]:
         """Format a message for search results"""
-        return {
+        result = {
             "channel": message.channel_name,
-            "user": message.username,
-            "timestamp": self.extractor._format_timestamp(message.timestamp),
             "text": message.text,
             "is_thread_parent": message.is_thread_parent,
             "reply_count": message.reply_count,
             "message_id": message.id
         }
+        
+        if self.extractor.load_users:
+            result["user"] = message.username
+            result["timestamp"] = self.extractor._format_timestamp(message.timestamp)
+        
+        return result
     
     def _get_channel_breakdown(self, messages: List[Message]) -> Dict[str, int]:
         """Get a breakdown of messages by channel"""
@@ -246,7 +251,7 @@ def main():
     args = parser.parse_args()
     
     # Initialize search interface
-    search_interface = SlackSearchInterface()
+    search_interface = SlackSearchInterface(load_users=False)  # Minimal mode by default
     search_interface.initialize(join_channels=not args.no_join, days_back=args.days)
     
     results = {}
