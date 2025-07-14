@@ -8,7 +8,7 @@ from slack_sdk.errors import SlackApiError
 # WebClient instantiates a client that can call API methods
 # When using Bolt, you can use either `app.client` or the `client` passed to listeners.
 # Use environment variable for security - set SLACK_BOT_TOKEN in your environment
-client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN", "xoxb-9194967619826-9195284375778-miH73Owan31ItmdrK1DDrVqP"))
+client = WebClient(token=os.environ.get("SLACK_BOT_TOKEN"))
 logger = logging.getLogger(__name__)
 
 try:
@@ -54,7 +54,6 @@ try:
     standalone_messages = []
     
     for message in messages:
-        print(message)
         thread_ts = message.get("thread_ts")
         ts = message.get("ts")
         
