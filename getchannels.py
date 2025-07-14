@@ -1,9 +1,13 @@
 import logging
 import os
 import json
+from dotenv import load_dotenv
 # Import WebClient from Python SDK (github.com/slackapi/python-slack-sdk)
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
+
+# Load environment variables from .env file
+load_dotenv()
 
 # WebClient instantiates a client that can call API methods
 # When using Bolt, you can use either `app.client` or the `client` passed to listeners.
