@@ -1,1 +1,1 @@
-   export SLACK_BOT_TOKEN="your-actual-token-here"
+export SLACK_BOT_TOKEN=""
