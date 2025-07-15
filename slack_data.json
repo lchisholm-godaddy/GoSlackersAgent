@@ -1,0 +1,68 @@
+{
+  "search_query": "",
+  "total_messages": 16,
+  "channels_included": [
+    "bugs-template-bugs-here"
+  ],
+  "conversations": [
+    {
+      "channel": "bugs-template-bugs-here",
+      "standalone_messages": [
+        {
+          "text": "random images"
+        },
+        {
+          "text": "<http://www.google.com|www.google.com>"
+        },
+        {
+          "text": "*This is bolded text*"
+        },
+        {
+          "text": "_this is italics_"
+        },
+        {
+          "text": "1. this is bullet 1"
+        },
+        {
+          "text": "\u2022 this is bullet .\n\u2022 this is bullet .."
+        },
+        {
+          "text": "&gt; This is where you add a paragraph\n&gt; this is paragraph"
+        },
+        {
+          "text": "This`is where we write code lalalala`"
+        },
+        {
+          "text": "```this is the code block\nprint(name)```"
+        },
+        {
+          "text": "This is voice message"
+        },
+        {
+          "text": "this is video"
+        },
+        {
+          "text": "this is where i mention <@U096E131SCQ>"
+        },
+        {
+          "text": "This is supposed to be a thread please reply here with any thing that you want :slightly_smiling_face:"
+        }
+      ],
+      "threads": [
+        {
+          "messages": [
+            {
+              "text": "This is first reply to this thread"
+            },
+            {
+              "text": "This is 2nd reply to the thread"
+            },
+            {
+              "text": "this is 3rd reply to the thread"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
