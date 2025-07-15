@@ -1,64 +1,886 @@
 {
   "search_query": "",
-  "total_messages": 16,
+  "total_messages": 181,
   "channels_included": [
-    "bugs-template-bugs-here"
+    "slack-bot-dev",
+    "random",
+    "sales-deals-test",
+    "channel-test2",
+    "channel-test",
+    "bugs-template-bugs-here",
+    "hosting-services",
+    "pcx-prs",
+    "general",
+    "px-team",
+    "cafeteria-talks",
+    "px-hosting-dev",
+    "conversations-frontend"
   ],
   "conversations": [
     {
-      "channel": "bugs-template-bugs-here",
+      "channel": "channel-test",
+      "channel_id": "C095B3NRBBR",
       "standalone_messages": [
         {
-          "text": "random images"
+          "text": "h",
+          "timestamp": "p1752518922810319"
         },
         {
-          "text": "<http://www.google.com|www.google.com>"
+          "text": "y",
+          "timestamp": "p1752518923030679"
         },
         {
-          "text": "*This is bolded text*"
+          "text": "u",
+          "timestamp": "p1752518923264029"
         },
         {
-          "text": "_this is italics_"
+          "text": "j",
+          "timestamp": "p1752518923457219"
         },
         {
-          "text": "1. this is bullet 1"
+          "text": "m",
+          "timestamp": "p1752518923686369"
         },
         {
-          "text": "\u2022 this is bullet .\n\u2022 this is bullet .."
+          "text": "k",
+          "timestamp": "p1752518923888249"
         },
         {
-          "text": "&gt; This is where you add a paragraph\n&gt; this is paragraph"
+          "text": "i",
+          "timestamp": "p1752518924096579"
         },
         {
-          "text": "This`is where we write code lalalala`"
+          "text": "o",
+          "timestamp": "p1752518924393669"
         },
         {
-          "text": "```this is the code block\nprint(name)```"
+          "text": "l",
+          "timestamp": "p1752518924621639"
         },
         {
-          "text": "This is voice message"
+          "text": "channel test",
+          "timestamp": "p1752518971567539"
         },
         {
-          "text": "this is video"
+          "text": "<@U095R8CB1NW> what is being served in the tempe office cafeteria?",
+          "timestamp": "p1752540955764519"
         },
         {
-          "text": "this is where i mention <@U096E131SCQ>"
+          "text": "Hi <@U095NP3KLAJ>, working on an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?...",
+          "timestamp": "p1752540957965709"
         },
         {
-          "text": "This is supposed to be a thread please reply here with any thing that you want :slightly_smiling_face:"
+          "text": "Here's an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?: I'm sorry, I don't have real-time information on the menu at the Tempe office cafeteria. You may want to check with the cafeteria staff or look for a menu posted on-site.",
+          "timestamp": "p1752540975315779"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?: I'm sorry, I do not have real-time information on the menu being served in the Tempe office cafeteria. It would be best to check with the cafeteria staff or a colleague who may have that information.",
+          "timestamp": "p1752541681990839"
+        }
+      ],
+      "threads": []
+    },
+    {
+      "channel": "channel-test2",
+      "channel_id": "C095L6VMF9R",
+      "standalone_messages": [
+        {
+          "text": "ju",
+          "timestamp": "p1752518963901149"
+        },
+        {
+          "text": "i",
+          "timestamp": "p1752518964158809"
+        },
+        {
+          "text": "k",
+          "timestamp": "p1752518964361269"
+        },
+        {
+          "text": "l",
+          "timestamp": "p1752518964566219"
+        },
+        {
+          "text": "o",
+          "timestamp": "p1752518964768589"
+        },
+        {
+          "text": "m",
+          "timestamp": "p1752518964972259"
+        },
+        {
+          "text": "p",
+          "timestamp": "p1752518965186249"
+        },
+        {
+          "text": "channel test 2",
+          "timestamp": "p1752518966918779"
+        },
+        {
+          "text": "<@U095R8CB1NW>  hello",
+          "timestamp": "p1752533620973809"
+        },
+        {
+          "text": "Hey <@U095NP3KLAJ>, running `getchannels.py` now...",
+          "timestamp": "p1752533626396559"
+        },
+        {
+          "text": "Done!\n```Found 1 threaded messages and 14 standalone messages\n\n============================================================\nTHREAD #1 - 1752533304.863609:\n============================================================\nPARENT MESSAGE:\n  User: U095T1F7VPE\n  Timestamp: 1752533304.863609\n  Text: This is supposed to be a thread please reply here with any thing that you want :slightly_smiling_face:\n  Type: message\n\nREPLIES (3):\n  Reply #1:\n    User: U095T1F7VPE\n    Timestamp: 1752533314.371809\n    Text: This is first reply to this thread\n    Type: message\n\n  Reply #2:\n    User: U095T1F7VPE\n    Timestamp: 1752533319.441439\n    Text: This is 2nd reply to the thread\n    Type: message\n\n  Reply #3:\n    User: U095T1F7VPE\n    Timestamp: 1752533333.985529\n    Text: this is 3rd reply to the thread\n    Type: message\n\n============================================================\n\nSTANDALONE MESSAGES (14):\n============================================================\nMessage #1:\n  User: U095R8CB1NW\n  Timestamp: 1752530788.486439\n  Text: <@U095R8CB1NW> has joined the channel\n  Type: message\n  Subtype: channel_join\n\nMessage #2:\n  User: U095T1F7VPE\n  Timestamp: 1752527632.886299\n  Text: this is where i mention <@U096E131SCQ>\n  Type: message\n\nMessage #3:\n  User: U095T1F7VPE\n  Timestamp: 1752527618.794989\n  Text: this is video\n  Type: message\n\nMessage #4:\n  User: U095T1F7VPE\n  Timestamp: 1752527596.548579\n  Text: This is voice message\n  Type: message\n\nMessage #5:\n  User: U095T1F7VPE\n  Timestamp: 1752527579.989179\n  Text: \n  Type: message\n\nMessage #6:\n  User: U095T1F7VPE\n  Timestamp: 1752527545.750349\n  Text: ```this is the code block\nprint(name)```\n  Type: message\n\nMessage #7:\n  User: U095T1F7VPE\n  Timestamp: 1752527533.400179\n  Text: This`is where we write code lalalala`\n  Type: message\n\nMessage #8:\n  User: U095T1F7VPE\n  Timestamp: 1752527500.570099\n  Text: &gt; This is where you add a paragraph\n&gt; this is paragraph\n  Type: message\n\nMessage #9:\n  User: U095T1F7VPE\n  Timestamp: 1752527491.495199\n  Text: \u2022 this is bullet .\n\u2022 this is bullet ..\n  Type: message\n\nMessage #10:\n  User: U095T1F7VPE\n  Timestamp: 1752527483.357939\n  Text: 1. this is bullet 1\n  Type: message\n\nMessage #11:\n  User: U095T1F7VPE\n  Timestamp: 1752527476.765079\n  Text: _this is italics_\n  Type: message\n\nMessage #12:\n  User: U095T1F7VPE\n  Timestamp: 1752527472.589869\n  Text: *This is bolded text*\n  Type: message\n\nMessage #13:\n  User: U095T1F7VPE\n  Timestamp: 1752527430.328939\n  Text: <http://www.google.com|www.google.com>\n  Type: message\n\nMessage #14:\n  User: U095T1F7VPE\n  Timestamp: 1752527376.702869\n  Text: random images\n  Type: message\n\n```",
+          "timestamp": "p1752533628587859"
+        },
+        {
+          "text": "Done!\n```Error: The request to the Slack API failed. (url: <https://slack.com/api/conversations.history>)\nThe server responded with: {'ok': False, 'error': 'ratelimited'}\n```",
+          "timestamp": "p1752533654211259"
+        }
+      ],
+      "threads": []
+    },
+    {
+      "channel": "bugs-template-bugs-here",
+      "channel_id": "C095L7HALLB",
+      "standalone_messages": [
+        {
+          "text": "random images",
+          "timestamp": "p1752527376702869"
+        },
+        {
+          "text": "<http://www.google.com|www.google.com>",
+          "timestamp": "p1752527430328939"
+        },
+        {
+          "text": "*This is bolded text*",
+          "timestamp": "p1752527472589869"
+        },
+        {
+          "text": "_this is italics_",
+          "timestamp": "p1752527476765079"
+        },
+        {
+          "text": "1. this is bullet 1",
+          "timestamp": "p1752527483357939"
+        },
+        {
+          "text": "\u2022 this is bullet .\n\u2022 this is bullet ..",
+          "timestamp": "p1752527491495199"
+        },
+        {
+          "text": "&gt; This is where you add a paragraph\n&gt; this is paragraph",
+          "timestamp": "p1752527500570099"
+        },
+        {
+          "text": "This`is where we write code lalalala`",
+          "timestamp": "p1752527533400179"
+        },
+        {
+          "text": "```this is the code block\nprint(name)```",
+          "timestamp": "p1752527545750349"
+        },
+        {
+          "text": "This is voice message",
+          "timestamp": "p1752527596548579"
+        },
+        {
+          "text": "this is video",
+          "timestamp": "p1752527618794989"
+        },
+        {
+          "text": "this is where i mention <@U096E131SCQ>",
+          "timestamp": "p1752527632886299"
+        },
+        {
+          "text": "This is supposed to be a thread please reply here with any thing that you want :slightly_smiling_face:",
+          "timestamp": "p1752533304863609"
+        },
+        {
+          "text": "this is test msg in general chat in bugs channel",
+          "timestamp": "p1752543506905849"
+        },
+        {
+          "text": "this is test msg in general chat in bugs channel 22",
+          "timestamp": "p1752543867177039"
         }
       ],
       "threads": [
         {
           "messages": [
             {
-              "text": "This is first reply to this thread"
+              "text": "This is first reply to this thread",
+              "timestamp": "p1752533314371809"
             },
             {
-              "text": "This is 2nd reply to the thread"
+              "text": "This is 2nd reply to the thread",
+              "timestamp": "p1752533319441439"
             },
             {
-              "text": "this is 3rd reply to the thread"
+              "text": "this is 3rd reply to the thread",
+              "timestamp": "p1752533333985529"
+            },
+            {
+              "text": "replyyyyy 4",
+              "timestamp": "p1752540166142189"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "channel": "general",
+      "channel_id": "C095QUL2Q5Q",
+      "standalone_messages": [
+        {
+          "text": "<@U095R8CB1NW> hello",
+          "timestamp": "p1752533283604359"
+        },
+        {
+          "text": "Hi <@U095NP3KLAJ>! Say `get channels` to activate the script.",
+          "timestamp": "p1752533339850989"
+        },
+        {
+          "text": "<@U095R8CB1NW>",
+          "timestamp": "p1752533487867519"
+        },
+        {
+          "text": "Hey <@U095NP3KLAJ>, running `getchannels.py` now...",
+          "timestamp": "p1752533658093559"
+        },
+        {
+          "text": "Done!\n```Error: The request to the Slack API failed. (url: <https://slack.com/api/conversations.history>)\nThe server responded with: {'ok': False, 'error': 'ratelimited'}\n```",
+          "timestamp": "p1752533659616949"
+        },
+        {
+          "text": "<https://goslacker.enterprise.slack.com/archives/C095U8P9F52>",
+          "timestamp": "p1752540945598299"
+        },
+        {
+          "text": "<https://goslacker.enterprise.slack.com/archives/C095SG0PB0S>",
+          "timestamp": "p1752540955751629"
+        },
+        {
+          "text": "this is test msg in general chat",
+          "timestamp": "p1752543491796059"
+        },
+        {
+          "text": "this is test msg in general chat 22",
+          "timestamp": "p1752543838011349"
+        },
+        {
+          "text": "@GoFetch what is today's date",
+          "timestamp": "p1752544349800969"
+        }
+      ],
+      "threads": []
+    },
+    {
+      "channel": "random",
+      "channel_id": "C095QULV458",
+      "standalone_messages": [
+        {
+          "text": "Done! Output:\n```Found 1 threaded messages and 14 standalone messages\n\n============================================================\nTHREAD #1 - 1752533304.863609:\n============================================================\nPARENT MESSAGE:\n  User: U095T1F7VPE\n  Timestamp: 1752533304.863609\n  Text: This is supposed to be a thread please reply here with any thing that you want :slightly_smiling_face:\n  Type: message\n\nREPLIES (3):\n  Reply #1:\n    User: U095T1F7VPE\n    Timestamp: 1752533314.371809\n    Text: This is first reply to this thread\n    Type: message\n\n  Reply #2:\n    User: U095T1F7VPE\n    Timestamp: 1752533319.441439\n    Text: This is 2nd reply to the thread\n    Type: message\n\n  Reply #3:\n    User: U095T1F7VPE\n    Timestamp: 1752533333.985529\n    Text: this is 3rd reply to the thread\n    Type: message\n\n============================================================\n\nSTANDALONE MESSAGES (14):\n============================================================\nMessage #1:\n  User: U095R8CB1NW\n  Timestamp: 1752530788.486439\n  Text: <@U095R8CB1NW> has joined the channel\n  Type: message\n  Subtype: channel_join\n\nMessage #2:\n  User: U095T1F7VPE\n  Timestamp: 1752527632.886299\n  Text: this is where i mention <@U096E131SCQ>\n  Type: message\n\nMessage #3:\n  User: U095T1F7VPE\n  Timestamp: 1752527618.794989\n  Text: this is video\n  Type: message\n\nMessage #4:\n  User: U095T1F7VPE\n  Timestamp: 1752527596.548579\n  Text: This is voice message\n  Type: message\n\nMessage #5:\n  User: U095T1F7VPE\n  Timestamp: 1752527579.989179\n  Text: \n  Type: message\n\nMessage #6:\n  User: U095T1F7VPE\n  Timestamp: 1752527545.750349\n  Text: ```this is the code block\nprint(name)```\n  Type: message\n\nMessage #7:\n  User: U095T1F7VPE\n  Timestamp: 1752527533.400179\n  Text: This`is where we write code lalalala`\n  Type: message\n\nMessage #8:\n  User: U095T1F7VPE\n  Timestamp: 1752527500.570099\n  Text: &gt; This is where you add a paragraph\n&gt; this is paragraph\n  Type: message\n\nMessage #9:\n  User: U095T1F7VPE\n  Timestamp: 1752527491.495199\n  Text: \u2022 this is bullet .\n\u2022 this is bullet ..\n  Type: message\n\nMessage #10:\n  User: U095T1F7VPE\n  Timestamp: 1752527483.357939\n  Text: 1. this is bullet 1\n  Type: message\n\nMessage #11:\n  User: U095T1F7VPE\n  Timestamp: 1752527476.765079\n  Text: _this is italics_\n  Type: message\n\nMessage #12:\n  User: U095T1F7VPE\n  Timestamp: 1752527472.589869\n  Text: *This is bolded text*\n  Type: message\n\nMessage #13:\n  User: U095T1F7VPE\n  Timestamp: 1752527430.328939\n  Text: <http://www.google.com|www.google.com>\n  Type: message\n\nMessage #14:\n  User: U095T1F7VPE\n  Timestamp: 1752527376.702869\n  Text: random images\n  Type: message\n\n```",
+          "timestamp": "p1752533463186819"
+        },
+        {
+          "text": "message",
+          "timestamp": "p1752533466605809"
+        },
+        {
+          "text": "<@U095NGKQMRC> Running `getchannels.py` now...",
+          "timestamp": "p1752533472865669"
+        },
+        {
+          "text": "Done! Output:\n```Found 1 threaded messages and 14 standalone messages\n\n============================================================\nTHREAD #1 - 1752533304.863609:\n============================================================\nPARENT MESSAGE:\n  User: U095T1F7VPE\n  Timestamp: 1752533304.863609\n  Text: This is supposed to be a thread please reply here with any thing that you want :slightly_smiling_face:\n  Type: message\n\nError getting replies: The request to the Slack API failed. (url: <https://slack.com/api/conversations.replies>)\nThe server responded with: {'ok': False, 'error': 'ratelimited'}\n============================================================\n\nSTANDALONE MESSAGES (14):\n============================================================\nMessage #1:\n  User: U095R8CB1NW\n  Timestamp: 1752530788.486439\n  Text: <@U095R8CB1NW> has joined the channel\n  Type: message\n  Subtype: channel_join\n\nMessage #2:\n  User: U095T1F7VPE\n  Timestamp: 1752527632.886299\n  Text: this is where i mention <@U096E131SCQ>\n  Type: message\n\nMessage #3:\n  User: U095T1F7VPE\n  Timestamp: 1752527618.794989\n  Text: this is video\n  Type: message\n\nMessage #4:\n  User: U095T1F7VPE\n  Timestamp: 1752527596.548579\n  Text: This is voice message\n  Type: message\n\nMessage #5:\n  User: U095T1F7VPE\n  Timestamp: 1752527579.989179\n  Text: \n  Type: message\n\nMessage #6:\n  User: U095T1F7VPE\n  Timestamp: 1752527545.750349\n  Text: ```this is the code block\nprint(name)```\n  Type: message\n\nMessage #7:\n  User: U095T1F7VPE\n  Timestamp: 1752527533.400179\n  Text: This`is where we write code lalalala`\n  Type: message\n\nMessage #8:\n  User: U095T1F7VPE\n  Timestamp: 1752527500.570099\n  Text: &gt; This is where you add a paragraph\n&gt; this is paragraph\n  Type: message\n\nMessage #9:\n  User: U095T1F7VPE\n  Timestamp: 1752527491.495199\n  Text: \u2022 this is bullet .\n\u2022 this is bullet ..\n  Type: message\n\nMessage #10:\n  User: U095T1F7VPE\n  Timestamp: 1752527483.357939\n  Text: 1. this is bullet 1\n  Type: message\n\nMessage #11:\n  User: U095T1F7VPE\n  Timestamp: 1752527476.765079\n  Text: _this is italics_\n  Type: message\n\nMessage #12:\n  User: U095T1F7VPE\n  Timestamp: 1752527472.589869\n  Text: *This is bolded text*\n  Type: message\n\nMessage #13:\n  User: U095T1F7VPE\n  Timestamp: 1752527430.328939\n  Text: <http://www.google.com|www.google.com>\n  Type: message\n\nMessage #14:\n  User: U095T1F7VPE\n  Timestamp: 1752527376.702869\n  Text: random images\n  Type: message\n\n```",
+          "timestamp": "p1752533475324669"
+        },
+        {
+          "text": "<@U095R8CB1NW> hello",
+          "timestamp": "p1752533570544459"
+        },
+        {
+          "text": "Hi <@U095NGKQMRC>! Say `get channels` to activate the script.",
+          "timestamp": "p1752533575808899"
+        },
+        {
+          "text": "<@U095R8CB1NW> h",
+          "timestamp": "p1752533592437139"
+        },
+        {
+          "text": "Hey <@U095NGKQMRC>, running `getchannels.py` now...",
+          "timestamp": "p1752533595065259"
+        },
+        {
+          "text": "Done!\n```Found 1 threaded messages and 14 standalone messages\n\n============================================================\nTHREAD #1 - 1752533304.863609:\n============================================================\nPARENT MESSAGE:\n  User: U095T1F7VPE\n  Timestamp: 1752533304.863609\n  Text: This is supposed to be a thread please reply here with any thing that you want :slightly_smiling_face:\n  Type: message\n\nREPLIES (3):\n  Reply #1:\n    User: U095T1F7VPE\n    Timestamp: 1752533314.371809\n    Text: This is first reply to this thread\n    Type: message\n\n  Reply #2:\n    User: U095T1F7VPE\n    Timestamp: 1752533319.441439\n    Text: This is 2nd reply to the thread\n    Type: message\n\n  Reply #3:\n    User: U095T1F7VPE\n    Timestamp: 1752533333.985529\n    Text: this is 3rd reply to the thread\n    Type: message\n\n============================================================\n\nSTANDALONE MESSAGES (14):\n============================================================\nMessage #1:\n  User: U095R8CB1NW\n  Timestamp: 1752530788.486439\n  Text: <@U095R8CB1NW> has joined the channel\n  Type: message\n  Subtype: channel_join\n\nMessage #2:\n  User: U095T1F7VPE\n  Timestamp: 1752527632.886299\n  Text: this is where i mention <@U096E131SCQ>\n  Type: message\n\nMessage #3:\n  User: U095T1F7VPE\n  Timestamp: 1752527618.794989\n  Text: this is video\n  Type: message\n\nMessage #4:\n  User: U095T1F7VPE\n  Timestamp: 1752527596.548579\n  Text: This is voice message\n  Type: message\n\nMessage #5:\n  User: U095T1F7VPE\n  Timestamp: 1752527579.989179\n  Text: \n  Type: message\n\nMessage #6:\n  User: U095T1F7VPE\n  Timestamp: 1752527545.750349\n  Text: ```this is the code block\nprint(name)```\n  Type: message\n\nMessage #7:\n  User: U095T1F7VPE\n  Timestamp: 1752527533.400179\n  Text: This`is where we write code lalalala`\n  Type: message\n\nMessage #8:\n  User: U095T1F7VPE\n  Timestamp: 1752527500.570099\n  Text: &gt; This is where you add a paragraph\n&gt; this is paragraph\n  Type: message\n\nMessage #9:\n  User: U095T1F7VPE\n  Timestamp: 1752527491.495199\n  Text: \u2022 this is bullet .\n\u2022 this is bullet ..\n  Type: message\n\nMessage #10:\n  User: U095T1F7VPE\n  Timestamp: 1752527483.357939\n  Text: 1. this is bullet 1\n  Type: message\n\nMessage #11:\n  User: U095T1F7VPE\n  Timestamp: 1752527476.765079\n  Text: _this is italics_\n  Type: message\n\nMessage #12:\n  User: U095T1F7VPE\n  Timestamp: 1752527472.589869\n  Text: *This is bolded text*\n  Type: message\n\nMessage #13:\n  User: U095T1F7VPE\n  Timestamp: 1752527430.328939\n  Text: <http://www.google.com|www.google.com>\n  Type: message\n\nMessage #14:\n  User: U095T1F7VPE\n  Timestamp: 1752527376.702869\n  Text: random images\n  Type: message\n\n```",
+          "timestamp": "p1752533597174509"
+        },
+        {
+          "text": "<@U095R8CB1NW> hgjgjhb",
+          "timestamp": "p1752533935216319"
+        },
+        {
+          "text": "<@U095R8CB1NW> dsadsdasdasd",
+          "timestamp": "p1752533995616859"
+        },
+        {
+          "text": "chat chat chat",
+          "timestamp": "p1752543484743749"
+        },
+        {
+          "text": "this is test msg in general chat in randommmmm",
+          "timestamp": "p1752543531787679"
+        },
+        {
+          "text": "this is test msg in general chat in randommmmm 222",
+          "timestamp": "p1752543844043519"
+        }
+      ],
+      "threads": []
+    },
+    {
+      "channel": "hosting-services",
+      "channel_id": "C095S611M7F",
+      "standalone_messages": [
+        {
+          "text": "Hey Team!\n\nIt looks like we made some great progress in regards to concerns with the cPanel api, and the associated latency - however during a walkthrough this morning, the PX engineering team noted that there still may be some concerns in regards to the Venture/cPanel connections, and how the logic works.\n\nHere's one example of an observation/customer path we replicated today (Recording attached below, start at 04:22)\n1. Purchased a new domain `<http://venturetrial22025.com|venturetrial22025.com>`\n2. Domain Purchased path forced use of WAM/AIRO coming soon page\n    a. This applies a WAM DNS template to the domain\n3. Purchased a cPanel account\n4. Provisioned cPanel account\n5. Attached domain `<http://venturetrial22025.com|venturetrial22025.com>` to web Hosting\n6. Confirmed in DNS manager that the cPanel DNS template was applied (A record was pointing to cPanel account)\n7. DNS had NOT publicly resolved immediately, due to propagation\n8. Visited my Products, Venture is still WAM\n9. As a customer likely would, followed primary actions to edit/use WAM\n10. WAM DNS template re-applied, once publish was used (not just on the editor, as we saw as a false-positive at ~07:45\n11.  As domain was already on cPanel, no way to \"re-attach\" to apply correct template\n12. Updated A record on domain to point to cPanel\n13. Confirmed DNS changes\n14. Noted that DNS publicly updated\n15. Venture is STILL WAM\n16. NOTE:  the rest of the video shows me desperately try to find a way to fix the issue as a customer - the old trick to delete/cancel the WAM trial from the subscriptions page is no longer visible in all cases due to recent changes from the renewals team. (Freemium products no longer show on this page)\nI rechecked multiple times throughout the day on Friday, and about 4 hours after the original attempts, the venture tile finally redirected to cPanel vs WAM.\n\nDespite the back and forth here, I think we need to come back together and determine how we can ensure that once a domain is attached to cPanel, the venture shows cPanel vs WAM.\n\n@ntucakovic believes he ran across additional use cases as he has an example account that continues to show WAM despite being on cpanel - however we cannot readily replicate his path.\n\nThere is a meeting set for Tuesday for our normal sync - if we have the right folks, I would like to discuss a path to dig into this once again, and find how we can align towards solutions etc - thanks!\n\n<https://secureservernet-my.sharepoint.com/:v:/g/personal/mrichards_godaddy_com/ETlt5vpvvZRNl2O0BQZC2usBMcE3s_mEDX-OLnji2xGuYQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&amp;e=J6i7rL|Meeting with mrichards-20250711_090033-Meeting Recording.mp4>",
+          "timestamp": "p1752541002733189"
+        },
+        {
+          "text": "And to share the <https://godaddy-corp.atlassian.net/wiki/spaces/PCXCORE/pages/3806003258/VH+cPanel+Deployment+Plan#Release-Strategy|Deployment Plan> for the initiative, with emphasis on the Release Strategy as that\u2019s what we touched on yesterday.\nThere will be new updates to the document soon.",
+          "timestamp": "p1752541014560999"
+        },
+        {
+          "text": "Hey team, to continue on the last meeting regarding *Sidebar Links;*\n\nWe\u2019ve decided on these items for the first launch:\n\u2022 Website - Root level, always available, opens up Overview page by default\n    \u25e6 Overview (currently shows just the website view, should be extended with links and actions) - *link always available*\n    \u25e6 Site Optimizer  - *behind A/B test, either visible in sidebar, if part of an experiment, or not at all, with redirect back to the root dashboard if not*\n    \u25e6 Hosting Settings - we\u2019re doing smaller batch of features, as discussed few times, with some of the tools pointing to MYH Settings page - *link always available*\nWe\u2019ve discussed a few times with the team on this, but have to check whether this approach is still possible:\n<https://github.com/gdcorp-im/vnext-dashboard/pull/3258>\n\nRequest <https://godaddy.slack.com/archives/C18F5CX39/p1750867086651869|on support channel> for the PR.\n\nCurrently `leftNavItems.json` as a source of truth for hosting links, but from what I\u2019ve heard we want to transition away from that, to what other dashboards are using.\n\nThat\u2019s why I\u2019m currently unsure how to proceed.\n\u2022 Am I wrong in thinking the json map is used as a source of truth on VH cPanel production?\n\u2022 Should the switch to another approach be scoped as part of VH cPanel work or can it be done in parallel?\n    \u25e6 Can we get an assistance on this if it is, to at least port the existing sidebar to the new pattern where we\u2019ll extend to fit the needs for the initiative?\nThanks @cvogt and @mbhandari for your help so far on this topic.",
+          "timestamp": "p1752541025601919"
+        },
+        {
+          "text": "Hey all :waveboi1:\nUpdate for Site Optimizer on cPanel VH:\nThrough <https://godaddy-corp.atlassian.net/browse/HPX-1554|template> and <https://godaddy-corp.atlassian.net/browse/HPX-1192|integration> tickets, we made sure that existing Site Optimizer component loads correctly in a <https://dashboard.test-godaddy.com/venture/hosting/site-optimizer?ventureId=823b1546-8d78-478f-8f4c-25f1599252de|new route> on VentureHome, being: `/venture/hosting/site-optimizer?ventureId={ventureId}`\nWe protected the route so that only those in the <https://hivemind.gdcorp.tools/experiments/site-optimizer-web-hosting-vh-hpx-1192/settings?env=test|Hivemind experiment> can access it. Those who are not in the experiment, per trying to reach that route (via bookmark for example), will be redirected to the Hosting Overview page.\n@tkrause",
+          "timestamp": "p1752541042282159"
+        },
+        {
+          "text": "*Matthew Richards*  [7:47 AM]\nHello Team!  Hope you all had a great weekend!  @ajavadov, as we continue to move forward on this project, @ntucakovic has pointed out/reminded me that we are only showing VH to cPanel customers with one website on their cPanel plan.  As time allows, can we discuss in this :thread: if it would make sense to show the cPanel plan on VH to all customers based on the Primary domain as a part of our phase 2, regardless of how many sites they have?  My thought is that since we will be showing a sites list on our settings page, it will at least provide a reference to the other sites.  Also, as  MYA currently only shows the accordion for the cPanel plan based on the primary domain, it would be a 1:1 experience between the 2. Love to hear your thoughts - thank you in advance!",
+          "timestamp": "p1752541052870999"
+        },
+        {
+          "text": "Another question.. I\u2019m trying to spin up cPanel VH dashboard locally on *test* environment, in order to create blank pages we need for the initiative.\nAfter setting up all the products needed for this, I realized that it will always show domain (W+M) dashboard instead of a cPanel account tied to a purchased *test* env domain.\n\nHow can I get around it, in order to prepare the pages? Is working in production preferred in this case or is there a workaround? (edited)",
+          "timestamp": "p1752541120691309"
+        },
+        {
+          "text": "Hey team, I noticed that workflow where user seemingly doesn\u2019t leave VH experience when navigating across different apps by keeping VH sidebar across other apps that @ajavadov  demoed few days ago. Could you provide more information on it?\n\nWe\u2019re also wondering what\u2019s the effort needed to do such an integration for Hosting Settings page?\nI\u2019ve noticed that there might be some changes on the page itself to make it behave as expected as part of VH (to avoid leaking unplanned MYH features), but it shouldn\u2019t take long",
+          "timestamp": "p1752541126699789"
+        },
+        {
+          "text": "<@U095R8CB1NW> give me information about the venture homes or VH initiative",
+          "timestamp": "p1752550892720909"
+        },
+        {
+          "text": "Hi <@U095NGKQMRC>, working on an answer for your question: <@U095R8CB1NW> give me information about the venture homes or VH initiative",
+          "timestamp": "p1752550896121349"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nVenture Homes (VH) is an initiative within the hosting services department at GoDaddy. The available message provides a brief description of VH and its organizational placement. Found in #cafeteria-talks: <https://gslackersdev.slack.com/archives/C09669L640H/p1752542193632789>\n\n:link: *Related Slack Messages:*\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540955764519|#channel-test: <@U095R8CB1NW> what is being served in the tempe o...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752541681990839|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540975315779|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;",
+          "timestamp": "p1752550898835329"
+        }
+      ],
+      "threads": [
+        {
+          "messages": [
+            {
+              "text": "Hi @mrichards, I think for cPanel, we are not checking what actually the hosting is being used for.\n\nHere\u2019s the current logic at the high-level:\n\u2022 User lands on VH -&gt; Does it have a domain -&gt; YES -&gt; Is the domain connected to a hosting plan -&gt; YES -&gt; Show Hosting experience on VH\n[11:58 AM]\n@cvogt correct, me but we are not checking what\u2019s actually installed or how many websites installed in the hosting when checking where the domain is pointing?",
+              "timestamp": "p1752541062735949"
+            },
+            {
+              "text": "*Chris Vogt*  [11:59 AM]\nCorrect. If someone has an example shopper with multiple sites in one cPanel account I can double-check the data we fetch and see how that comes back. (We may already have that information and just aren't utilizing it.)\n\n[11:59 AM]\nWe do match the domainName in the venture to the domain set on the cPanel account. To determine they are \"associated\". (edited)",
+              "timestamp": "p1752541068899759"
+            },
+            {
+              "text": "*Matthew Richards*  [12:01 PM]\nAH, i see.   I did not verify, but going off a comment from @ntucakovic in a DM:\n&gt; I\u2019ve noticed in VH code that we\u2019re hiding cPanel VH experience and dashboards if a user has more then 1 site on a cPanel plan?\nLet's verify tomorrow where he is seeing that code, and reconcile from there.  I had a vague memory of a past conversation where it was set up in this manner, but I could certainly be incorrect!",
+              "timestamp": "p1752541077559859"
+            },
+            {
+              "text": "*Araz Javadov*  [12:05 PM]\nyou\u2019re probably re-calling MWP - multi-site MWP plans are currently not enabled on VH",
+              "timestamp": "p1752541083774949"
+            },
+            {
+              "text": "*Matthew Richards*  [12:06 PM]\nah, could be!",
+              "timestamp": "p1752541088589779"
+            },
+            {
+              "text": "I bet Nikola saw <https://github.com/gdcorp-im/vnext-dashboard/blob/e26572a6ae4a028fb9ef1f03238b184c8b839077/src/reducers/hosting.js#L48C1-L52C33|this> \u2014 and if so, that's a poor variable naming choice on my end because it's too vague. Here's what it does...\n\n```  return (hasCpanelHosting\n    // For now we exclude customers when multiple websites are detected in the venture, because our\n    // UI can only support 1 website per venture. This is set by loadHostingAccounts.js when WAM or\n    // MWP is detected in the venture.\n    &amp;&amp; !hasMultiWebsiteVenture);```\nThat check isn't for multiple websites in cPanel, but rather _are there multiple active websites in the venture data_. Which is done <https://github.com/gdcorp-im/vnext-dashboard/blob/e26572a6ae4a028fb9ef1f03238b184c8b839077/src/features/VentureHome/middleware/loadHostingAccounts.js#L57C1-L60C65|here>.\n\n```// Loop through all venture projects looking for active MWP or WAM projects. If the other sites\n// aren't published or haven't been modified in 45 days, this will return false and the cPanel\n// experience will take over.\nconst checkAreOtherWebsitesActive = (venture, options = {}) =&gt; { ```\n",
+              "timestamp": "p1752541100557059"
+            },
+            {
+              "text": "[1:19 PM]\nSo \"multiple websites\" really means something more like: *hasMultipleActiveWAMOrMWPInVentureData*. With extra criteria around published vs unpublished and &gt;45 days since modification (PG *project.accessed* timestamp). (edited)",
+              "timestamp": "p1752541108000179"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "channel": "px-hosting-dev",
+      "channel_id": "C095SG0PB0S",
+      "standalone_messages": [
+        {
+          "text": "Hi team,\nI'm testing VM creation on the new OH cloud platform but consistently getting \"credit suspended\" errors, even though the VMs are successfully provisioned and active.\n*Affected VM IDs:*\n\u2022 4e3c6124-6069-11f0-95b1-7cd30aca43de\n*Issue:* The VPS Control Plane team confirmed everything looks correct:\n\u2022 Get Credit shows: `\"accountStatus\": \"ACTIVE\"`, `\"suspended\": false`, `\"vmSuspended\": false`\n\u2022 Get VM shows: VM is provisioned and available\n\u2022 However, the polling endpoint (`/views/poll-account`) is returning incorrect credit suspended status\nThis appears to be a mismatch between the actual VM state and what the polling endpoint returns. Can someone investigate why the poll-account endpoint is showing suspended status for active VMs?\nLet me know if you need any additional details.\nThanks!\nLink to Slack conv. <https://godaddy.slack.com/archives/G26466AMS/p1752467596254659>",
+          "timestamp": "p1752536659517009"
+        },
+        {
+          "text": "Hey hey @px-core-hosting-product, per our discussion today, I've married up the Capacity Planning Document and <https://home.atlassian.com/o/dc9d19c0-76bb-418a-a9b8-932af9da007a/s/1f012970-03f4-4025-b750-cbaa332d8a3b/goal/GODAD1-2043/projects|Atlas Initiatives Page>, so all committed initiatives are present and accounted for. Let me know if you have any questions!\n\nP.S. That's right. Ya'll have a user group now :slightly_smiling_face:",
+          "timestamp": "p1752536670097309"
+        },
+        {
+          "text": "Hi @benjamin6616 !!  I'm looking to start a conversation about dynamically passing the recommended PHP version for MWP from the backend. Do you know who or which channel would be best to reach out to for this?\n\nReferencing this ticket: <https://godaddy-corp.atlassian.net/browse/HPX-1610>\nAnd this endpoint: <https://mwp.api.phx3.godaddy.com/api/v1/mwp/sites/{resourceUid}>\n\nThanks!\n\ncc: @jcanez",
+          "timestamp": "p1752536693024709"
+        },
+        {
+          "text": "Hello: @cuptain1 and @fneto\nI am revisiting a v2 feature from Q1, we are checking on the status of the backend implementation of V2 Reset File Permissions endpoint,  Was this ever placed back on the roadmap?\n\nOriginally in the V1 implementation we had this layout which allowed the user to reset the permission from our UI but with the v2 version we required a new path but at the time this endpoint work was not planned out so we punted it, we check last quarter so just doing my due diligence to see if this is on the horizon or not.\nHere is the *<https://godaddy.slack.com/archives/C07SUADKLA2/p1729885797984419|original thread>* for reference and the current Ticket: *<https://godaddy-corp.atlassian.net/browse/HPX-1022|HPX-1022>*.\ncc: @hpx-dev",
+          "timestamp": "p1752536713569419"
+        },
+        {
+          "text": "These are the EIDs I identified for CICD integration. Is this the complete list?",
+          "timestamp": "p1752536756468689"
+        },
+        {
+          "text": "Attached is the list of API endpoints for Git integration.\n@benjamin6616 let me know if this covers everything needed for the UI team's requirements or if any additions are required.\n\nLink to Jira Comment: <https://godaddy-corp.atlassian.net/browse/WPVTWO-3266?focusedCommentId=6590545> (edited)\nThis file was not found.",
+          "timestamp": "p1752536800091939"
+        },
+        {
+          "text": ":vertical_traffic_light: *Urgency:* :large_green_circle: Normal\n\n:bust_in_silhouette: *Author:* @ntucakovic\n\n:zap: *Repository name:* :red_circle: partners-hosting-ui\n\n:pencil2: *PR Title:* Hide unfinished ui elements in preparation for the VH release\n\n:link: *PR Link:* <https://github.com/gdcorp-partners/partners-hosting-ui/pull/283/files>\n\n:jira-2155: *Jira ticket:* None\n\n:information_source: *Additional info* (optional)*:*",
+          "timestamp": "p1752536819988149"
+        },
+        {
+          "text": "[5:20 PM] Create a new PR message\n\n:vertical_traffic_light: *Urgency:* :large_green_circle: Normal\n\n:bust_in_silhouette: *Author:* @jcanez\n\n:zap: *Repository name:* :black_circle:\ufe0f hcx-global-ui\n\n:pencil2: *PR Title:* CPanel SSL Cert Automation Snagging\n\n:link: *PR Link:* <https://github.com/gdcorp-partners/hcx-global-ui/pull/243>\n\n:jira-2155: *Jira ticket:* <https://godaddy-corp.atlassian.net/browse/HPX-1651>\n\n:information_source: *Additional info* (optional)*:*",
+          "timestamp": "p1752536827648809"
+        }
+      ],
+      "threads": [
+        {
+          "messages": [
+            {
+              "text": "```hcx.mwp.settings.git_primary.info.label\nhcx.mwp.settings.git_primary.connect_key.click\nhcx.mwp.settings.git_primary.open_deploy_modal.click\nhcx.mwp.settings.git_primary.back.click\nhcx.mwp.settings.git_primary.download.click\nhcx.mwp.settings.git_primary.back.click\nhcx.mwp.settings.git_primary.copy.click\nhcx.mwp.settings.git_primary.open_delete_modal.click\nhcx.mwp.settings.git_primary.cancel.click\nhcx.mwp.settings.git_primary.close.click\nhcx.mwp.settings.git_primary.info.label\nhcx.mwp.settings.git_primary.open_delete_modal.click\nhcx.mwp.settings.git_primary.delete.click```",
+              "timestamp": "p1752536765167509"
+            },
+            {
+              "text": "Yes, and the same ones starting with `hcx.mwp.settings.git_staging` for Staging card\nFor example:\n```hcx.mwp.settings.git_staging.info.label\nhcx.mwp.settings.git_staging.connect_key.click\nhcx.mwp.settings.git_staging.open_deploy_modal.click```\nand so on",
+              "timestamp": "p1752536773101869"
+            }
+          ]
+        },
+        {
+          "messages": [
+            {
+              "text": "It fell below the cut-line for Q3 again.\n\n\n[2:06 PM]\nReferring to line 91 here: <https://godaddy-corp.atlassian.net/wiki/spaces/PAR/pages/3797582230/Q3+2025+OKR+Capacity+Planning+-+V2+Manticore#:~:text=Re%2Dadd%20MWP%E2%80%99s%20%E2%80%9Creset%20file%20permissions%E2%80%9D%20feature|https://godaddy-corp.atlassian.net/wiki/spaces/PAR/pages/3797582230/Q3+2025+OKR+Capacity+Planning+-+V2+Manticore#:~:text=Re%2Dadd[\u2026]%80%9D%20feature>\n\n@sclark3 - Just making sure I didn't miss any happy accidents in Q2, the ability to call Maid for fix file permissions via MWP UI is still unavailable, yea?",
+              "timestamp": "p1752536728171839"
+            },
+            {
+              "text": "Thanks @benjamin6616 for the update, I'll update the ticket and check back in Q4",
+              "timestamp": "p1752536734454229"
+            }
+          ]
+        },
+        {
+          "messages": [
+            {
+              "text": "There's a private channel private channel but I don't see any reason this convo should be private. #managed-wordpress-1 is where I'd go. Please tag @vmijin as manager for the team,",
+              "timestamp": "p1752536703091699"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "channel": "pcx-prs",
+      "channel_id": "C095U8P9F52",
+      "standalone_messages": [
+        {
+          "text": ":vertical_traffic_light: *Urgency:* :large_green_circle: Normal\n\n:bust_in_silhouette: *Author:* @ffilipovic\n\n:zap: *Repository name:* :red_circle: partners-hosting-ui\n\n:pencil2: *PR Title:* VH Cpanel settings style issues\n\n:link: *PR Link:* <https://github.com/gdcorp-partners/partners-hosting-ui/pull/281>\n\n:jira-2155: *Jira ticket:* <https://godaddy-corp.atlassian.net/browse/HPX-1658>",
+          "timestamp": "p1752538113492939"
+        },
+        {
+          "text": ":vertical_traffic_light: *Urgency:* :large_green_circle: Normal\n\n:bust_in_silhouette: *Author:* @jcanez\n\n:zap: *Repository name:* :large_orange_circle: hcx-micro-cpanel\n\n:pencil2: *PR Title:* CPanel SSL Cert Automation Snagging\n\n:link: *PR Link:* <https://github.com/gdcorp-partners/hcx-micro-cpanel/pull/399>\n\n:jira-2155: *Jira ticket:* <https://godaddy-corp.atlassian.net/browse/HPX-1651>\n\n:information_source: *Additional info* (optional)*:*",
+          "timestamp": "p1752538121821859"
+        },
+        {
+          "text": ":vertical_traffic_light: *Urgency:* :large_green_circle: Normal\n\n:bust_in_silhouette: *Author:* @rgambelic\n\n:zap: *Repository name:* :red_circle: partners-hosting-ui\n\n:pencil2: *PR Title:* HPX-1198: Account Settings Card [Integration]\n\n:link: *PR Link:* <https://github.com/gdcorp-partners/partners-hosting-ui/pull/282>\n\n:jira-2155: *Jira ticket:* <https://godaddy-corp.atlassian.net/browse/HPX-1198>\n\n:information_source: *Additional info* (optional)*:*",
+          "timestamp": "p1752538128617019"
+        }
+      ],
+      "threads": []
+    },
+    {
+      "channel": "cafeteria-talks",
+      "channel_id": "C09669L640H",
+      "standalone_messages": [
+        {
+          "text": "<@U095R8CB1NW> what is being served in the tempe office cafeteria?",
+          "timestamp": "p1752536184645389"
+        },
+        {
+          "text": "Hi <@U095NGKQMRC>, working on an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?...",
+          "timestamp": "p1752536186833109"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?: I'm sorry, I do not have real-time information on the menu at the Tempe office cafeteria. It would be best to check with the cafeteria staff or a colleague at the office for the most up-to-date information on what is being served.",
+          "timestamp": "p1752536200246899"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?: I'm sorry, I do not have real-time information on the current offerings at the tempe office cafeteria. I recommend checking with the cafeteria staff or the office's internal communication channels for the most up-to-date menu.",
+          "timestamp": "p1752540696237879"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?: I'm sorry, I don't have real-time information on the menu at the Tempe office cafeteria. You may want to check with the cafeteria staff or look for a menu posted on-site.",
+          "timestamp": "p1752541927741899"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> what is being served in the tempe office cafeteria?: I'm not able to provide real-time information on the menu at the tempe office cafeteria. I recommend checking with the cafeteria staff or visiting their website for the most up-to-date information on what is being served.",
+          "timestamp": "p1752542150126699"
+        },
+        {
+          "text": "<@U095R8CB1NW> give me information about the venture homes or VH initiative",
+          "timestamp": "p1752542187294079"
+        },
+        {
+          "text": "Hi <@U095NGKQMRC>, working on an answer for your question <@U095R8CB1NW> give me information about the venture homes or VH initiative...",
+          "timestamp": "p1752542189922639"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> give me information about the venture homes or VH initiative: Venture Homes (VH) is an initiative within the hosting services department at GoDaddy. The VH initiative focuses on improving the customer experience for users who have cPanel hosting plans. The goal of the initiative is to provide a seamless and user-friendly dashboard for customers to manage their hosting services.\n\nSome key points regarding the VH initiative include:\n1. The VH initiative aims to ensure that once a domain is attached to cPanel, the Venture Homes dashboard displays cPanel information instead of other services like WAM.\n2. There is ongoing work to integrate features like Site Optimizer into the VH dashboard, ensuring that only users included in specific experiments can access certain functionalities.\n3. The team is discussing strategies to show the cPanel plan on Venture Homes to all customers based on the primary domain, regardless of the number of sites they have.\n4. There have been discussions about maintaining a consistent user experience between Venture Homes and other platforms like MYA, especially in terms of displaying hosting information.\n\nOverall, the VH initiative at GoDaddy is focused on enhancing the hosting experience for customers with cPanel plans by providing a user-friendly and feature-rich dashboard.",
+          "timestamp": "p1752542193632789"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> give me information about the venture homes or VH initiative: Venture Homes is a real estate development company that specializes in building and selling residential properties. The VH initiative may refer to a specific project or program by Venture Homes aimed at creating affordable housing solutions, promoting sustainable development, or addressing specific community needs. Unfortunately, without more context, it is difficult to provide specific information about the VH initiative.",
+          "timestamp": "p1752542477643509"
+        },
+        {
+          "text": "Here's an answer for your question <@U095R8CB1NW> give me information about the venture homes or VH initiative: Venture Homes (VH) is an initiative that focuses on providing affordable housing solutions for individuals and families in need. The organization works to create sustainable and inclusive communities by offering a range of housing options, such as rental units, shared housing, and affordable homeownership opportunities.\n\nVH partners with local governments, non-profit organizations, and private developers to identify and develop affordable housing projects. They also offer support services, such as financial counseling, job training, and educational programs, to help residents achieve stability and success.\n\nOverall, Venture Homes is committed to addressing the growing need for affordable housing and creating vibrant, thriving communities for all.",
+          "timestamp": "p1752542541509379"
+        },
+        {
+          "text": "Hi <@U095NGKQMRC>, working on an answer for your question: <@U095R8CB1NW> give me information about the venture homes or VH initiative",
+          "timestamp": "p1752544008868289"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nThe Venture Homes (VH) initiative is a project within the hosting services department at GoDaddy. The main focus of the VH initiative is to enhance the customer experience for users with cPanel hosting plans. The goal is to provide a seamless and user-friendly dashboard for customers to manage their hosting services effectively.\n\nKey points about the VH initiative include:\n1. Ensuring that once a domain is connected to cPanel, the Venture Homes dashboard displays cPanel information instead of other services like WAM.\n2. Ongoing work to integrate features like Site Optimizer into the VH dashboard, restricting access to specific functionalities to users included in specific experiments.\n3. Discussions regarding displaying the cPanel plan on Venture Homes for all customers based on the primary domain, regardless of the number of sites they have.\n4. Emphasizing a consistent user experience between Venture Homes and other platforms like MYA, especially in terms of displaying hosting information.\n\nOverall, the VH initiative at GoDaddy is dedicated to improving the hosting experience for customers with cPanel plans by providing a user-friendly and feature-rich dashboard.",
+          "timestamp": "p1752544014549229"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nVenture Homes (VH) is an initiative at GoDaddy that focuses on improving the customer experience for cPanel users. The VH initiative aims to enhance the interface and functionality of cPanel accounts, making it more user-friendly and efficient for customers. As part of this initiative, there are ongoing developments and improvements being made to the cPanel experience, including features like Site Optimizer integration, capacity planning, and Git integration.\n\nThe VH initiative also involves addressing specific issues and concerns related to the cPanel API, latency, domain connections, and the logic behind how VH interacts with cPanel accounts. The goal is to ensure a seamless and consistent experience for customers when using cPanel services.\n\nOverall, the VH initiative is dedicated to enhancing the hosting experience for customers using cPanel accounts, providing a more intuitive and effective platform for managing their websites and hosting services.",
+          "timestamp": "p1752547837680639"
+        },
+        {
+          "text": "*lily*  [7:50 PM]\n<@U095R8CB1NW> give me information about the venture homes or VH initiative",
+          "timestamp": "p1752548254209699"
+        },
+        {
+          "text": "Hi <@U095NGKQMRC>, working on an answer for your question: *lily*  [7:50 PM]\n<@U095R8CB1NW> give me information about the venture homes or VH initiative",
+          "timestamp": "p1752548256146819"
+        },
+        {
+          "text": "Here's an answer for your question:\n*lily*  [7:50 PM]\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nI'm sorry, I don't know the answer to that question.",
+          "timestamp": "p1752548273645349"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nI'm sorry, I don't have any information about the venture homes or VH initiative.",
+          "timestamp": "p1752548302501589"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nI'm sorry, I don't know the answer to that question. This question seems to be related to the Venture Homes or VH initiative, which may be discussed in a specific channel in Slack.",
+          "timestamp": "p1752548383388599"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nI'm sorry, I don't know the answer to that question. It seems to be related to the Venture Homes or VH initiative. You can check the Slack channel for more information: <https://slack.com/archives/C09669L640H>\n\n:link: *Related Slack Messages:*\n<https://slack.com/archives/C095B3NRBBR/p1752518922810319|#channel-test: h>\n<https://slack.com/archives/C095B3NRBBR/p1752518923264029|#channel-test: u>\n<https://slack.com/archives/C095B3NRBBR/p1752518923686369|#channel-test: m>",
+          "timestamp": "p1752548449289199"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nI couldn't find relevant information in the available Slack conversations.\n\n:link: *Related Slack Messages:*\n<https://slack.com/archives/C095B3NRBBR/p1752518922810319|#channel-test: h>\n<https://slack.com/archives/C095B3NRBBR/p1752518923264029|#channel-test: u>\n<https://slack.com/archives/C095B3NRBBR/p1752518923686369|#channel-test: m>",
+          "timestamp": "p1752548709567219"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\n:x: API call failed.",
+          "timestamp": "p1752549278182559"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nVenture Homes (VH) is mentioned as an initiative within the hosting services department at GoDaddy, and also described as a real estate development company specializing in building and selling homes. Found in #cafeteria-talks: <https://slack.com/archives/C09669L640H/p1752542193632789> and <https://slack.com/archives/C09669L640H/p1752542477643509>\n\n:link: *Related Slack Messages:*\n&lt;https://slack.com/archives/C095B3NRBBR/p1752540955764519|#channel-test: <@U095R8CB1NW> what is being served in the tempe o...&gt;\n&lt;https://slack.com/archives/C095B3NRBBR/p1752541681990839|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;\n&lt;https://slack.com/archives/C095B3NRBBR/p1752540975315779|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;",
+          "timestamp": "p1752549798339559"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nVenture Homes (VH) is an initiative that focuses on providing affordable housing solutions and is part of the hosting services department at GoDaddy. For more details, see the relevant messages in #cafeteria-talks:\n\n- <https://gslackersdev.slack.com/archives/C09669L640H/p1752542193632789>\n- <https://gslackersdev.slack.com/archives/C09669L640H/p1752542541509379>\n\n:link: *Related Slack Messages:*\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540955764519|#channel-test: <@U095R8CB1NW> what is being served in the tempe o...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752541681990839|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540975315779|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;",
+          "timestamp": "p1752550546073569"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nVenture Homes (VH) is an initiative within the hosting services department at GoDaddy. For more details, see the message in the #cafeteria-talks channel: <https://gslackersdev.slack.com/archives/C09669L640H/p1752542193632789>\n\n:link: *Related Slack Messages:*\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540955764519|#channel-test: <@U095R8CB1NW> what is being served in the tempe o...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752541681990839|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540975315779|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;",
+          "timestamp": "p1752550627374549"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nVenture Homes (VH) is an initiative within the hosting services department at GoDaddy. For more detailed information, refer to the answer provided in the #cafeteria-talks channel.  \nFound in #cafeteria-talks  \nSlack URL: <https://gslackersdev.slack.com/archives/C09669L640H/p1752542193632789>\n\n:link: *Related Slack Messages:*\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540955764519|#channel-test: <@U095R8CB1NW> what is being served in the tempe o...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752541681990839|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540975315779|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;",
+          "timestamp": "p1752550730608059"
+        },
+        {
+          "text": "Here's an answer for your question:\n<@U095R8CB1NW> give me information about the venture homes or VH initiative\n\nVenture Homes (VH) is an initiative within the hosting services department at GoDaddy. The available message provides a brief overview of this initiative. Found in #cafeteria-talks: <https://gslackersdev.slack.com/archives/C09669L640H/p1752542193632789>\n\n:link: *Related Slack Messages:*\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540955764519|#channel-test: <@U095R8CB1NW> what is being served in the tempe o...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752541681990839|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;\n&lt;https://gslackersdev.slack.com/archives/C095B3NRBBR/p1752540975315779|#channel-test: Here's an answer for your question <@U095R8CB1NW> ...&gt;",
+          "timestamp": "p1752550752549149"
+        }
+      ],
+      "threads": []
+    },
+    {
+      "channel": "slack-bot-dev",
+      "channel_id": "C096FG9B0MN",
+      "standalone_messages": [
+        {
+          "text": "What is the first step to creating our slack bot",
+          "timestamp": "p1752541304464529"
+        },
+        {
+          "text": "What APIs do you think we should use for this project?",
+          "timestamp": "p1752541318169499"
+        },
+        {
+          "text": "I dont know",
+          "timestamp": "p1752541327501969"
+        },
+        {
+          "text": "Which AI should we use for this bot",
+          "timestamp": "p1752541344311749"
+        },
+        {
+          "text": "After we get the repo up and running, what do you think our next step should be?",
+          "timestamp": "p1752541394876719"
+        },
+        {
+          "text": "What language should we write our scripts in?",
+          "timestamp": "p1752541415662719"
+        },
+        {
+          "text": "Here is some info I found about how to access GoCaas: <https://caas.api.godaddy.com/api-docs/#/>",
+          "timestamp": "p1752541457453119"
+        },
+        {
+          "text": "We have our slack bot up and running, and now we just need to feed that info to GoCaas",
+          "timestamp": "p1752541504701549"
+        },
+        {
+          "text": "this is test msg in slack bot dev chat",
+          "timestamp": "p1752543522714389"
+        },
+        {
+          "text": "this is test msg in slack bot dev chat 222",
+          "timestamp": "p1752543850895599"
+        },
+        {
+          "text": "Hey everyone - what's our next step for the project",
+          "timestamp": "p1752547824557379"
+        },
+        {
+          "text": "I have the presentation draft!",
+          "timestamp": "p1752547854555279"
+        },
+        {
+          "text": "yay! what else do we have to do",
+          "timestamp": "p1752547893958419"
+        },
+        {
+          "text": "I think <@U095T1F7VPE> is working on the caching",
+          "timestamp": "p1752547895318619"
+        },
+        {
+          "text": "and <@U095NP3KLAJ> is working on her acting skills for the prez :wink:",
+          "timestamp": "p1752547938309479"
+        },
+        {
+          "text": "ok perfect",
+          "timestamp": "p1752547965537949"
+        },
+        {
+          "text": "<@U096E131SCQ> what are you up to right now?",
+          "timestamp": "p1752547967692769"
+        },
+        {
+          "text": "i am going out to play soccer with the united states national team",
+          "timestamp": "p1752548017437699"
+        },
+        {
+          "text": "omg that's so cool, what position do you play?",
+          "timestamp": "p1752548083921569"
+        },
+        {
+          "text": "I play left winger.",
+          "timestamp": "p1752548110056449"
+        },
+        {
+          "text": "left winger wow",
+          "timestamp": "p1752548256687209"
+        },
+        {
+          "text": "very cool",
+          "timestamp": "p1752548441592849"
+        },
+        {
+          "text": "Now we are trying to test the workflow of the application",
+          "timestamp": "p1752551067050809"
+        }
+      ],
+      "threads": [
+        {
+          "messages": [
+            {
+              "text": "python tbh",
+              "timestamp": "p1752541437559239"
+            }
+          ]
+        },
+        {
+          "messages": [
+            {
+              "text": "cry",
+              "timestamp": "p1752541416995219"
+            }
+          ]
+        },
+        {
+          "messages": [
+            {
+              "text": "goCaas, internal GoDaddy AI agent, based off of either GPT or Claude",
+              "timestamp": "p1752541408706009"
+            }
+          ]
+        },
+        {
+          "messages": [
+            {
+              "text": "Slack API, goCaas",
+              "timestamp": "p1752541342053879"
+            }
+          ]
+        },
+        {
+          "messages": [
+            {
+              "text": "go Emma :slightly_smiling_face:",
+              "timestamp": "p1752547901607859"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "channel": "sales-deals-test",
+      "channel_id": "C09657U9A9X",
+      "standalone_messages": [
+        {
+          "text": "how are the sales going? are we making a lot of money?",
+          "timestamp": "p1752548457903279"
+        }
+      ],
+      "threads": []
+    },
+    {
+      "channel": "conversations-frontend",
+      "channel_id": "C095SNC4XB4",
+      "standalone_messages": [
+        {
+          "text": "^ for sure",
+          "timestamp": "p1752555370919079"
+        },
+        {
+          "text": "I cannot do Q3 i will do Q4",
+          "timestamp": "p1752555381040879"
+        },
+        {
+          "text": "Q3 we lost a lot of money",
+          "timestamp": "p1752555393317019"
+        },
+        {
+          "text": "definitely need to address the current push towards agentic AI - maybe a workshop to help learn prompt engineering",
+          "timestamp": "p1752555407979099"
+        },
+        {
+          "text": "We are going to be profit in Q4",
+          "timestamp": "p1752555410008369"
+        },
+        {
+          "text": "especially once we push some of the new updates we have in planning :eyes:",
+          "timestamp": "p1752555449659679"
+        },
+        {
+          "text": "the globalization project in particular, it looks like everything will be good soon to publish in Canada for the French speaking population. just make sure en-US.json is being properly updated and we don't have hardcoded literals",
+          "timestamp": "p1752555508089969"
+        },
+        {
+          "text": "sounds like a plan !",
+          "timestamp": "p1752555524081289"
+        },
+        {
+          "text": "Here is the link for gocass\n<https://godaddy-corp.atlassian.net/wiki/spaces/BI/pages/3795708618/GoDaddyAgent+Slackbot+User+Guide#How-to-Enable-GoDaddyAgent-in-a-Channel>",
+          "timestamp": "p1752555573457829"
+        },
+        {
+          "text": "great, we can use this for the Airo logo issue",
+          "timestamp": "p1752555594619089"
+        },
+        {
+          "text": "I wanted to know more about this endpoint , where can i find more information about it ?\n\n<https://availcheck.api.dev.aws.godaddy.com/availcheckdocs/#/Domain_Avail_Check/checkZoneGet>",
+          "timestamp": "p1752555603626989"
+        },
+        {
+          "text": "it was written in docs <https://godaddy-corp.atlassian.net/wiki/spaces/BI/pages/10363419/Access+Related+Information>",
+          "timestamp": "p1752555629400479"
+        },
+        {
+          "text": "Groupchat! We just need one more person I believe\n\n*Emma Ylagan*  [12:19 PM]\nHi! I'm Emma, nice to meet you guys\n\n*Lily Chisholm*  [12:19 PM]\nNice to meet you too :)) I\u2019m Lily\n\n*Emma Ylagan*  [12:20 PM]\nI met someone through the intro meeting at the beginning of the B start term - should I message and ask if he has a team?\n[12:20 PM] Emma Ylagan\n\nOr we can wait til the end of the day to see if anyone else reaches out based on your message\n\n*Lily Chisholm*  [12:21 PM]\nCan you send his profile?\n\n*Emma Ylagan*  [12:23 PM]\nHis name is Richie - @rnguyen\n\n*Lily Chisholm*  [12:28 PM]\nooh ok!\n[12:28 PM] Lily Chisholm\n\ni guess just in case let's wait until end of day, and if there's no response ask him\n\n*Subigya Gautam*  [12:33 PM]\nNice to meet you guys !!\n\n*Subigya Gautam*  [4:17 PM]\ndid we find our 4th member ?\n\n*Lily Chisholm*  [4:19 PM]\nNothing yet I think\n\n*Subigya Gautam*  [4:20 PM]\nmeanwhile , if you guys can comeup with a team name that would be great , i am not that creative kind but i can try to come up with some too\n\n\n\n\n*Subigya Gautam*  [8:18 AM]\nHey guys , Do you guys have any ideas or plans regarding the project?\n\n*Emma Ylagan*  [8:19 AM]\nHmm, do you guys want to call later and talk about some of our interests or any ideas we have?\n[8:20 AM] Emma Ylagan\n\nI didn't have any ideas off the bat\n\n*Lily Chisholm*  [8:22 AM]\nI was thinking some sort of automation or way to make current processes at GoDaddy simpler\n[8:23 AM] Lily Chisholm\n\nsome way of streamlining\n[8:23 AM] Lily Chisholm\n\nbut no idea what problems are currently a thing for GoDaddy employees as a whole\n\n*Emma Ylagan*  [8:25 AM]\nOh, does it have to be Godaddy related?\n[8:26 AM] Emma Ylagan\n\nI like that idea tho! Maybe we can all talk to our mentors / buddies over the next week to see any problems\n\n*Emma Ylagan*  [8:26 AM]\nOne thing I have is potentially lack of connectivity with remote teams like mine - I don't think it's a huge issue but I think some people could benefit from more interactions / ways of feeling more connected especially when they first join the company.\n\n*Lily Chisholm*  [8:34 AM]\nI think it does have to be GoDaddy related, you're allowed to use the GoDaddy repos and make your own branch off of them to work and stuff (edited)\n\n*Emma Ylagan*  [8:47 AM]\nGotcha\n[8:48 AM] Emma Ylagan\n\nFunny enough my project on my team for this summer is creating an API to help better streamline our processes\n[8:48 AM] Emma Ylagan\n\nThere must be more things out there that need automating / streamlining\n\n*Subigya Gautam*  [8:59 AM]\nYeah I am relatively new here too , just 3rd week so I dont know what pain points are there and we would have enough time to deal with them\n[9:01 AM] Subigya Gautam\n\nmaybe what we can do is , talk around with people who had already been part of hackathon , get an idea of potential projects/ problems that we can solve , and then get in a call to discuss those things\n\n*Lily Chisholm*  [9:02 AM]\nI think it would be good to reach out to our teams to see what issues they see, or what features they would like to have\n[9:02 AM] Lily Chisholm\n\nOld hackathon projects and presentations are available in the sharepoint i believe if you want to take a look! I forget who won last year but I think their project had something to do with connecting people\n\n*Subigya Gautam*  [9:02 AM]\nI agree and being in different team is one benefit , we can have different perspectives\n\n*Lily Chisholm*  [9:03 AM]\nYes!\n\n*Subigya Gautam*  [9:04 AM]\nyeah i had come across a video it was 2 hr long :cool_crying_grimace: , i think we should watch it sometime , did you guys check it out ?\n[9:04 AM] Subigya Gautam\n\nI will try to connect with someone today\n\n*Lily Chisholm*  [9:12 AM]\nNice haha\n[9:13 AM] Lily Chisholm\n\nI sent out this message:\n[9:13 AM] Lily Chisholm\n\nHi everyone! The intern hackathon is coming up in about two weeks, and my team and I have been trying to figure out what we can make. We wanted to find if there's any issues that more seasoned employees have noticed, or processes they would prefer to have automated, or some kind of issue at GoDaddy that you go \"man I wish someone would fix/build that.\" Please respond in this thread with literally anything that comes to mind! :-snoopydance-:\n\n*Subigya Gautam*  [9:41 AM]\ni will copy paste this to my mentors lol\n\n*Subigya Gautam*  [9:55 AM]\nBTW did we get our 4th teammate?\n\n*Lily Chisholm*  [9:58 AM]\nNot yet, <@U095T17S6S0> would you like to ask your friend if he'd like to join?\n\n*Subigya Gautam*  [10:00 AM]\nor we can search for other people\n\n*Emma Ylagan*  [10:34 AM]\nI can ask Richie - lmk if I should\n\n*Lily Chisholm*  [11:34 AM]\nI would say go for it, we already gave our bid in the intern chat lol\n[11:34 AM] Lily Chisholm\n\nALSO\n[11:34 AM] Lily Chisholm\n\nmy boss just sent me this thing: <https://www.loom.com/share/63a5157d42264d7c90f2d8bd47aa93ff?sid=88dabdd6-f658-4249-8e0e-45240ad051f9>\n*Loom* | Aaron Silvas\n:stopwatch: 22 min  :eyes: 73 views  :speech_balloon: 22 comments\n<https://www.loom.com/share/63a5157d42264d7c90f2d8bd47aa93ff|AIPro Client - 31 March 2025>\n\n\n\n\nAdded by\nLoom\n\n[11:35 AM] Lily Chisholm\n\nit's #aipro , apparently one of the new projects at godaddy that we might be able to work with to make something\n\nLil*y Chisholm*\n  [11:40 AM]\n#product-graph is also one of the newer projects\n\nLi*ly Chisholm*\n  [11:48 AM]\noh also I just got someone asking if they can join our team lol, @lnguyen1\n\nS*ubigya Gautam*\n  [11:54 AM]\nCool\n[11:54 AM] Subigya Gautam\n\nI am open to working with anyone I dont mind :slightly_smiling_face:\n\n*Lily Chisholm*  [11:55 AM]\nok sick! <@U095T17S6S0> thoughts? (edited)\n\n*Subigya Gautam*  [11:57 AM]\ndepends on who wants to work with us :stuck_out_tongue:\n\n*Emma Ylagan*  [12:00 PM]\nYeah! Add the other Lily\n\n*Subigya Gautam*  [12:01 PM]\nokay so lilies  :smile:\n[12:01 PM] Subigya Gautam\n\nGIF\n\t<https://media.tenor.com/Awb2urUz3hcAAAAM/lily-sheldon-lily.gif>\n[12:02 PM] Subigya Gautam\n\nXD\n\n*Emma Ylagan*  [12:03 PM]\nSome notes from my intern buddy about hackathons!\nScreenshot 2025-07-03 at 12.02.55\u202fPM.png\n\n\n\n\n\n*Lily Chisholm*  [12:58 PM]\nthese are very helpful omg\n[12:58 PM] Lily Chisholm\n\nalso let me go ahead and add lily\n\n*Lily Nguyen*  [12:58 PM]\nwas added to goslackers by\n.\n\n*Subigya Gautam*  [1:14 PM]\n\" So my team build a LLM model that studies a customers portfolio (existing domains and services they have) and recommends what other godaddy services they could use or domains that would go well with their portfolio. we got third place with ours!\n\nthere were a lot of different types of projects\n\ni\u2019d say use some godaddy apis in your project\n\nlike the UI\n\nand try to build something that would benefit godaddy and their customers\n\ni\u2019d say since Airo is really new and big right now\n\nmaybe do something related to that\n\n\"\n\nDropping it here for future reference , buddy's insight on the hackathon (edited)\n\n*Subigya Gautam*  [1:18 PM]\nI have yet to get back on this with my manager tho , will be dropping insights as i get them :smile:\n\n*Lily Nguyen*  [1:32 PM]\nHey hey!!!\n\n*Subigya Gautam*  [1:37 PM]\nHello , Nice to meet you , welcome to our team :slightly_smiling_face:\n\n*Lily Nguyen*  [1:38 PM]\nLikewiseee\n\n*Emma Ylagan*  [4:34 PM]\nHey! Is it cool if we chat over Discord during non-work hours?\n\n*Lily Chisholm*  [4:35 PM]\nI don\u2019t mind, although why not just use slack? :0\n\n*Emma Ylagan*  [4:36 PM]\nDo you guys have your slack on your phones? I only have it on my work computer and I don't check it on weekends\n\n*Lily Chisholm*  [4:36 PM]\nOhhh yeah I have it on my phone but in that case discord is fine\n\n*Emma Ylagan*  [4:36 PM]\nThanks! I'm in the interns group, I can make it if everyone else is in there too\n\n*Lily Chisholm*  [4:37 PM]\nmy username is mitsudango!\n\n*Subigya Gautam*  [4:37 PM]\nyou can reach me out on anything'\n\n*Emma Ylagan*  [4:37 PM]\n<@U095NP75KP0> @lnguyen1 What are your discord users?\n\n*Subigya Gautam*  [4:37 PM]\nit should be thisisit or subigya i got confused\n[4:38 PM] Subigya Gautam\n\nsorry about that i can confirm and let you know later on\n\n*Emma Ylagan*  [4:38 PM]\nI found it!\n\n*Subigya Gautam*  [4:40 PM]\nawesome\n\n*Lily Nguyen*  [5:06 PM]\nIMG_5373\n\n\n\n\n[5:06 PM] Lily Nguyen\n\nthis is me!\n[5:07 PM] Lily Nguyen\n\n<@U095T17S6S0> lmk if u need help adding slack to ur phone too! (edited)\n\n*Subigya Gautam*  [5:36 PM]\ni think i was friends with this acc already , cool :smile:\n\n*Subigya Gautam*  [6:07 PM]\n@lchisholm <https://discord.gg/ywF2g75E>\n\n\n*Discord*\n*<https://discord.gg/ywF2g75E|Thisisit has invited you to a group chat on Discord!>*\nHang out and enjoy free voice and text chat.\n\n*Lily Chisholm*  [6:18 PM]\nSorry for going awol, I\u2019m on the east coast so I just logged off at five\n\n\n\n\n*Lily Nguyen*  [8:50 AM]\nits ok as you should queen\n\n*Lily Chisholm*  [8:51 AM]\nty ty :meow_noddies:\n\n*Subigya Gautam*  [9:31 AM]\nhey guys , did anyone register our team ?\n\n*Lily Nguyen*  [9:32 AM]\nnot that i know of??\n\n*Emma Ylagan*  [9:32 AM]\nI haven't\n\n*Lily Nguyen*  [9:32 AM]\nsamesies\n\n*Subigya Gautam*  [9:34 AM]\nlet's plan a meeting soon so that we can discuss and figureout what we will work on for the hackathon , if today works for all let's do it\n\n*Lily Nguyen*  [9:36 AM]\nsounds good\n[9:36 AM] Lily Nguyen\n\nwhat time zone r yall in im lily EST, im MNT\n\n*Subigya Gautam*  [9:37 AM]\nI am in Arizona time zone\n\n*Emma Ylagan*  [9:37 AM]\nI'm usually EST but rn I'm visiting the west coast until we go to Arizona so PST\n\n*Subigya Gautam*  [9:38 AM]\nI am available at 12 and after 2pm (edited)\n\n*Subigya Gautam*  [9:53 AM]\nlet's find a common time and set today guys\n\n*Lily Nguyen*  [9:53 AM]\nI have time right now\n\n*Emma Ylagan*  [9:53 AM]\nI won't be free for a bit - can we do closer to EOD?\n\n*Lily Nguyen*  [9:54 AM]\nya works for me\n\n*Emma Ylagan*  [9:54 AM]\nI can update you guys better right after my standup sorry\n\n*Lily Nguyen*  [9:54 AM]\nI'm free after 2 my time so 1 your times\n[9:54 AM] Lily Nguyen\n\ni'll send out an invite for like 2:30\n\n*Emma Ylagan*  [9:56 AM]\nOk - works for me but @lchisholm let us know if that's too late for you, not sure when you're going to clock out\n\n*Lily Nguyen*  [9:56 AM]\nok i set it for 3 sorry @lchisholm it's like right at the end of the day for you\n[9:56 AM] Lily Nguyen\n\n:sob:\n[9:56 AM] Lily Nguyen\n\ni think you got a meeting at at EOD til then tho\n[9:56 AM] Lily Nguyen\n\nbut we can just meet for a few\n\n*Lily Chisholm*  [9:59 AM]\ni don't mind lol, I can stay overtime a bit :))\n\n*Lily Nguyen*  [10:04 AM]\npur pur pur\n\n*Subigya Gautam*  [10:09 AM]\nAwesome guys !\n\n*Emma Ylagan*  [10:59 AM]\nGuys I'm sorry - my mentor scheduled pair programming from 1-4 PST because we have some high priority deadlines this week :sob: can we either try and meet tmrw or can you guys take some notes about what we talk about and I'll catch up later?\n\n*Lily Nguyen*  [11:02 AM]\ntmr works for me we have some time before the hackathon!\n\n*Lily Chisholm*  [11:10 AM]\nI can make a doc for us to brainstorm on in the meantime then :)) just to add whatever you think of for project ideas and potential stack",
+          "timestamp": "p1752555702612069"
+        },
+        {
+          "text": "This PR introduces a FastAPI-based Model Context Protocol (MCP) server to handle domain search workflows, integrating DeepSpin for smart SLD generation and GoDaddy for TLD data and availability checks. It also adds HTTPS security, comprehensive health endpoints, and Docker containerization for production readiness.\n\u2022 Implements class-based MCP tools (domain search and health check) with a registry.\n\u2022 Adds REST and MCP protocol routers for `/search`, `/health`, `/mcp`, and misc endpoints.\n\u2022 Introduces HTTP client and configuration modules for external API integration and environment management.\nReviewed Changes\nCopilot reviewed 22 out of 23 changed files in this pull request and generated 2 comments.\nShow a summary per file\n\n<https://github.com/gdcorp-dna/tmp-dnai-mcp-poc/pull/1>\n\u2022 \n``````\n\n\u2022 \n``````\n\n\n<https://github.com/gdcorp-dna/tmp-dnai-mcp-poc/pull/1/files/8a5c4b839f82789cd1d5963d07089ce7dcf57d99#diff-0d4946b25c8ca7ef8341b4f0b268ff6da9ca8acfdbd0dd5b361bfabde33a85ab|server/routers/search.py>\nOutdated\n@router.post(\"/\", response_model=DomainSearchResponse)async def search_domains(search_request: DomainSearchRequest):    \"\"\"Direct domain search endpoint (alternative to MCP).\"\"\"    mcp_server_instance = Depends(get_mcp_server_instance)\n\n\n<https://github.com/apps/copilot-pull-request-reviewer|Copilot> AI\n\nDependencies must be declared as function parameters, not assigned inside the function body. Update the endpoint signature to:\n```async def search_domains(\n    search_request: DomainSearchRequest,\n    mcp_server_instance = Depends(get_mcp_server_instance)\n):```\n<https://docs.github.com/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-code-review|Copilot> uses AI. Check for mistakes.\n\n\n\n\n\n\ns<https://github.com/gdcorp-dna/tmp-dnai-mcp-poc/pull/1/files/8a5c4b839f82789cd1d5963d07089ce7dcf57d99#diff-0d4946b25c8ca7ef8341b4f0b268ff6da9ca8acfdbd0dd5b361bfabde33a85ab|erver/routers/search.py>\nOutdated\n\nfrom fastapi import Depends\ndef get_mcp_server_instance():\n\n\nC<https://github.com/apps/copilot-pull-request-reviewer|opilot>\n AI\n\n[nitpick] The `get_mcp_server_instance` and `set_mcp_server_instance` functions are duplicated in multiple router modules. Consider centralizing this logic into a shared utility to reduce code duplication.\n<https://docs.github.com/copilot/responsible-use-of-github-copilot-features/responsible-use-of-github-copilot-code-review|Copilot> uses AI. Check for mistakes.\n\n\n\n\n\n\n\ns<https://github.com/sgautam-godaddy|gautam-godaddy>\n added 3 commits <https://github.com/gdcorp-dna/tmp-dnai-mcp-poc/pull/1#commits-pushed-ed1700e|3 days ago>\n\n\n`added dependencies`\n\n`ed1700e`\n\n\n`removed dependencies`\n\n`fabf3f8`\n\n\n`removed dependencies`\n\n`e2e47c2`\nMerge info\n\n\nChanges reviewed\nNo applicable reviews submitted by reviewers with write access.\n\n\nlist of pending reviews\n\u2022 \n\u2022 <https://github.com/hpathak-godaddy|hpathak-godaddy>\n\u2022 was requested for review\n\u2022 \n\u2022 <https://github.com/byuong-godaddy|byuong-godaddy>\n\u2022 was requested for review\n\u2022 \n\u2022 <https://github.com/jqiu-godaddy|jqiu-godaddy>\n\u2022 was requested for review\nAll checks have passed\n2 successful checks\n\n\nNo conflicts with base branch\nMerging can be performed automatically.\nYou can also merge this with the command line.\n\nAdd a comment\nComment\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAdd your comment here...\n\n\n\n\n\nRemember, contributions to this repository should follow our\nGitHub Community<https://docs.github.com/articles/github-community-guidelines| Guidelines>\n.\n ProTip! Add\n.patch\n or\n.diff\n to the end of URLs for Git\u2019s plaintext views.\nReviewers\nCopilot cod<https://github.com/apps/copilot-pull-request-reviewer|e review>\n\n<https://github.com/apps/copilot-pull-request-reviewer|Copilot>\n\n\naprasad2-go<https://github.com/aprasad2-godaddy|daddy>\n\n\njqiu-godaddy\n\nhpathak-godad<https://github.com/hpathak-godaddy|dy>\n\nbyuong-godaddy\nStill in progress?\nAssignees\n\nsgautam-godaddy\nLabels\nNone yet\nProjects\nNone yet\nMilestone\nNo milestone\nDevelopment\nSuccessfully merging this pull request may close these issues.\nNone yet\n\n\nYou\u2019re receiving notifications because you were assigned.\n1 participant\n\n\nFooter\ngdcorp\n\n\ngdcorp\n\u2022 GitHub Must-have/S<https://tdl.gdcorp.tools/docs/tech-radar/tools/github-enterprise-cloud#description|hould-do/Never-do Guidance>\nTechRadar\n\n\u2022 GitHub Must-have<https://tdl.gdcorp.tools/docs/tech-radar/tools/github-enterprise-cloud#description|/Should-do/Never-do Guidance>\nTechRadar\n\n\n\u00a9 2025 GitHub, Inc.\nFooter navigation\nTerms\n\nPrivacy\n\nSecurity\n\nStatus\n\nDocs\n\nContact",
+          "timestamp": "p1752555767734599"
+        }
+      ],
+      "threads": [
+        {
+          "messages": [
+            {
+              "text": "Yes , we should !",
+              "timestamp": "p1752555427554699"
+            },
+            {
+              "text": "Agentic AI is the future boss",
+              "timestamp": "p1752555450751539"
+            },
+            {
+              "text": "AI rocks",
+              "timestamp": "p1752555463227319"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "channel": "px-team",
+      "channel_id": "C095T0QL5HB",
+      "standalone_messages": [
+        {
+          "text": "*Ivan Marojevic*  [2:59 AM]\nHey, Team! Decided to post here since we all copy and paste a JWT at least 20 times a day :smile:\nWith the current security push, the Security Experience has been bolstering our applications in order to ensure a smoother transition to the API Gateway for our dependencies. For one of the initiatives, we found ourselves in a need for aging JWT tokens, to be able to test enforcing a redirect to SSO if a token had been issued more than 12h ago.\nHere's a quick summary of what you need:\n\n\u2022 Registering a client cert with SSO - this document sums it up pretty well. We used a pre-existing client cert in order to avoid unnecessary clutter.\n    \u25e6 <https://godaddy-corp.atlassian.net/wiki/spaces/AUTH/pages/89657340/Client+Certs#ClientCerts-RegisteryourcertwithSSO|Registering a client cert with SSO>\n    \u25e6 The output from this should be a Registration workflow on the #sso-support channel, here's an example:\n        \u25aa\ufe0e <https://godaddy.slack.com/archives/C02AH2BUCVB/p1752083876675169?thread_ts=1752064718.858849&amp;cid=C02AH2BUCVB|SSO Certificate Registration Workflow Example>\n\u2022 \n\u2022 Now that cert can be used with SSO API in order to age the certificate, this guide is pretty straightforward:\n    \u25e6 <https://godaddy-corp.atlassian.net/wiki/spaces/AUTH/pages/89657501/Token+aging+service|Token Aging Service>\nWith these tools, there's no need to wait for anything when testing JWTs anymore, I hope you find this helpful! :time-travel:",
+          "timestamp": "p1752557018932159"
+        },
+        {
+          "text": "*Jordan Watson*  [6:39 AM]\nHey Folks :wave:\n\n@dmendis and I have spun up a *surge squad* under my leadership to tackle our Q3 objective: *5 agents delivered*. This squad operates out of #px-agents-surge where @px-agent-devs are laser-focused on taking @jeichorn &amp; @deverton BFF API MCP POC and rapidly shipping agents that solve real MWP challenges and unlock new capabilities within AiroHQ.\n\n*Here's how we swarm:*\n\u2022 *Speed over process* - We're moving fast and breaking through blockers in real-time\n\u2022 *Collective problem-solving* - First to hit a wall solves it for everyone behind them\n\u2022 *Cross-pollination* - Hub &amp; Site Optimizer teams are building agents too, so we share wins and learnings instantly\n*No red tape. No lengthy standups. Just relentless forward momentum.*\n\nThe goal is simple: *swarm together, learn together, ship together*. When someone cracks a tough problem, we all benefit. When someone needs support, the squad responds.\n\nDrop learnings in <#C095T0QL5HB|> or #px-agents-surge - let's cross-post everything and keep the knowledge flowing. This is about delivering best-in-class experiences to our customers through pure collaborative firepower.\n\n:fyi: This is the <https://godaddy-corp.atlassian.net/wiki/x/5JMo5Q|confluence space>.",
+          "timestamp": "p1752557028349279"
+        },
+        {
+          "text": "*Nikola Dimitrijevic*  [6:44 AM]\nHey all, I wanted to open up a thread here to discuss about changes coming to gateway which we have to follow through on our own frontend repos, in this specific case for hub. Change coming up is related to auth token TTL, it will be 12 hours and users will have to be redirected to SSO to login page (there is currently a bug on heartbeat team or sso team that will force users to relog even if they have checked \u201cStay signed in\u201d checkbox, but that\u2019s another topic), to follow this change through on our end we have to properly handle 401 errors on our frontend\u2019s side, as those 401 errors will be coming straight from gateway, they won\u2019t be reaching our APIs backend servers. There are a couple of implementation challenges how to handle this while ensuring reliable 401 redirects to SSO and maintaining code readability, and easier code maintenance:\nWe attempted to reuse the existing expired token redirection logic on shell, previously implemented by Hosting team <https://github.com/gdcorp-partners/hcx-spa-shell/pull/147/files|here>. However, it doesn\u2019t fully meet our needs because the redirection to SSO only occurs after a full page reload when the shell is called. This creates a problem where the token may expire, API calls start failing, but the user isn\u2019t redirected to sso until they manually reload the page. Not sure if it would be the similar situation on Hosting as well?\nPotential solutions we\u2019re considering:\n\u2022  Implement a Service Worker in the shell to intercept 401 responses and trigger a redirect to SSO. This is our preferred solution, but it requires additional investigation and testing effort to set up properly.\n\u2022  Override axios and fetch globally and enforce the use of these instances across all SPAs to handle 401 responses consistently.\nDo you have any suggestions or alternative ideas? This issue is affecting multiple teams and needs a global solution. (edited)",
+          "timestamp": "p1752557096305769"
+        }
+      ],
+      "threads": [
+        {
+          "messages": [
+            {
+              "text": "*Nikola Tucakovi\u0107*  [6:59 AM]\nfor the short term, as we discussed, I\u2019d suggest spinning up a SW which intercepts all requests and redirects to SSO page and that\u2019s it.\n\nLong term, high level, I think it\u2019d be best for SSO team to provide a service worker (or a script to inject into service worker), which does basically the same thing, but also encompasses inline SSO login screen for better UX, without users having to leave the page they\u2019re on.\n\nIf after such login we follow with a page reload, everything should work, user would stay put and that\u2019s it. Downside could be for the pages/flows that aren\u2019t persisting UI into url (like a modal modal where the error occurred not getting opened after reload or similar)\n\nI\u2019m just hoping there\u2019s some proprietary in-house package already that would resolve this elegantly for us that I\u2019m not aware of (edited)",
+              "timestamp": "p1752557108308769"
+            },
+            {
+              "text": "*Nick Thomas*  [7:05 AM]\nThat direction sounds reasonable, especially for GET flows where the UX hit is low. One thing I wanted to flag for further discussion \u2014 how do we envision handling `POST` or `PUT` requests that fail with a `401`, especially in flows that involve side effects (like form submissions or actions via buttons)?\nIf the Service Worker intercepts and redirects immediately, we risk losing request body context. Do we plan to differentiate handling between safe (GET) and unsafe (POST/PUT) methods in the short term?",
+              "timestamp": "p1752557117240609"
+            },
+            {
+              "text": "*Nikola Tucakovi\u0107*  [7:10 AM]\nthat\u2019s a very important point. I think it\u2019s a fairly lower chance of errors popping up on a POST request vs GET request, just because of number of made GET vs POST.\n\nI\u2019m unsure how we could avoid losing context? It does sound super annoying for a long form to lose content because of a page reload (or for instance working out a client report in the Hub :sweat_smile:).\n\nHow about a warning modal that pops up once we detect a TTL issue? With a user action to do a reload (which will do  an SSO redirect) or dismiss a modal.\n\nThat way, user has a chance to copy whatever progress they made before having to reload the page and login? (edited)",
+              "timestamp": "p1752557124054549"
             }
           ]
         }
