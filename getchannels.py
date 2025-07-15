@@ -626,6 +626,7 @@ def main():
     
     # Add cache-only mode option
     cache_only = os.environ.get("CACHE_ONLY", "false").lower() == "true"
+    process_all_channels = os.environ.get("PROCESS_ALL_CHANNELS", "false").lower() == "true"
     
     extractor = SlackDataExtractor(token, load_users=False, use_cache=True)  # Enable caching
     
@@ -691,9 +692,35 @@ def main():
     
     # Get all channels that need processing
     channels_to_process = []
+    skipped_channels = []
+    
     for channel in channels:
-        if channel.is_member or channel.name in [c.replace('#', '') for c in joined]:
+        if process_all_channels or channel.is_member or channel.name in [c.replace('#', '') for c in joined]:
             channels_to_process.append(channel)
+        else:
+            skipped_channels.append(channel)
+    
+    logger.info(f"Channel processing summary:")
+    logger.info(f"  - Total channels found: {len(channels)}")
+    logger.info(f"  - Channels to process: {len(channels_to_process)}")
+    logger.info(f"  - Channels skipped: {len(skipped_channels)}")
+    
+    if process_all_channels:
+        logger.info(f"PROCESS_ALL_CHANNELS=true - Processing all channels (may include failures)")
+    
+    if skipped_channels:
+        logger.info(f"Skipped channels (not member and couldn't join):")
+        for channel in skipped_channels:
+            logger.info(f"  - #{channel.name} (ID: {channel.id})")
+    
+    # Show which channels will be processed
+    logger.info(f"Processing channels:")
+    for channel in channels_to_process:
+        if process_all_channels:
+            member_status = "member" if channel.is_member else ("joined" if channel.name in [c.replace('#', '') for c in joined] else "forced")
+        else:
+            member_status = "member" if channel.is_member else "joined"
+        logger.info(f"  - #{channel.name} ({member_status})")
     
     logger.info(f"Processing {len(channels_to_process)} channels with ultra-conservative rate limiting")
     
