@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from fuzzywuzzy import fuzz, process
+from cache_manager import SlackCacheManager
 
 # Load environment variables from .env file
 load_dotenv()
@@ -53,12 +54,14 @@ class Channel:
 class SlackDataExtractor:
     """Main class for extracting and processing Slack data"""
     
-    def __init__(self, bot_token: str, load_users: bool = False):
+    def __init__(self, bot_token: str, load_users: bool = False, use_cache: bool = True, cache_file: str = "slack_cache.json"):
         self.client = WebClient(token=bot_token)
         self.channels: Dict[str, Channel] = {}
         self.messages: List[Message] = []
         self.users: Dict[str, str] = {}  # user_id -> username mapping
         self.load_users = load_users
+        self.use_cache = use_cache
+        self.cache_manager = SlackCacheManager(cache_file) if use_cache else None
         
     def get_users(self) -> Dict[str, str]:
         """Get all users and create id -> username mapping"""
@@ -143,38 +146,135 @@ class SlackDataExtractor:
             
         return joined_channels
     
-    def extract_channel_messages(self, channel_id: str, limit: int = 1000) -> List[Message]:
-        """Extract all messages and threads from a specific channel"""
+    def extract_channel_messages(self, channel_id: str, limit: int = 1000, force_refresh: bool = False) -> List[Message]:
+        """Extract all messages and threads from a specific channel with caching support"""
         messages = []
         thread_parents_found = 0
+        channel_name = self.channels[channel_id].name if channel_id in self.channels else "unknown"
+        
+        # Get cached messages (we'll merge with new ones)
+        cached_messages = []
+        if self.use_cache and self.cache_manager and not force_refresh:
+            cached_messages = self._get_cached_channel_messages(channel_id)
         
         try:
+            # Determine if we need full fetch or incremental
+            oldest_param = {}
+            if self.use_cache and self.cache_manager and not force_refresh and cached_messages:
+                last_message_ts = self.cache_manager.get_channel_last_message_ts(channel_id)
+                if last_message_ts:
+                    oldest_param["oldest"] = last_message_ts
+                    logger.info(f"#{channel_name}: Fetching new messages since {last_message_ts}")
+                else:
+                    logger.info(f"#{channel_name}: Full fetch (no timestamp in cache)")
+            else:
+                logger.info(f"#{channel_name}: Full fetch (force refresh or no cache)")
+            
             # Get channel history
             response = self.client.conversations_history(
                 channel=channel_id,
-                limit=limit
+                limit=limit,
+                **oldest_param
             )
             
-            channel_name = self.channels[channel_id].name if channel_id in self.channels else "unknown"
+            new_messages = []
+            latest_ts = None
             
             for msg_data in response.get("messages", []):
                 message = self._parse_message(msg_data, channel_id, channel_name)
                 if message:
-                    messages.append(message)
+                    new_messages.append(message)
+                    
+                    # Track latest timestamp
+                    if not latest_ts or message.timestamp > latest_ts:
+                        latest_ts = message.timestamp
                     
                     # If this is a thread parent, get all replies
                     if message.is_thread_parent:
                         thread_parents_found += 1
                         thread_messages = self._extract_thread_replies(channel_id, message.timestamp)
                         logger.debug(f"Found thread parent in #{channel_name} with {len(thread_messages)} replies")
-                        messages.extend(thread_messages)
+                        new_messages.extend(thread_messages)
+            
+            # Determine final message list
+            if oldest_param and new_messages:
+                # Incremental update - merge with existing cache
+                logger.info(f"#{channel_name}: Found {len(new_messages)} new messages")
+                messages = cached_messages + new_messages
+                
+                # Update cache incrementally
+                if self.use_cache and self.cache_manager:
+                    self.cache_manager.merge_with_existing_messages([asdict(msg) for msg in new_messages])
+                    self.cache_manager.update_channel_info(channel_id, channel_name, latest_ts)
+                    
+            elif oldest_param and not new_messages:
+                # No new messages - use cache
+                logger.info(f"#{channel_name}: No new messages, using cached data ({len(cached_messages)} messages)")
+                messages = cached_messages
+                
+                # Update the last fetch time even if no new messages
+                if self.use_cache and self.cache_manager:
+                    self.cache_manager.update_channel_info(channel_id, channel_name, 
+                                                         self.cache_manager.get_channel_last_message_ts(channel_id))
+                    
+            else:
+                # Full fetch - replace cache
+                logger.info(f"#{channel_name}: Full fetch returned {len(new_messages)} messages")
+                messages = new_messages
+                
+                if self.use_cache and self.cache_manager:
+                    # Clear existing messages for this channel from cache
+                    self.cache_manager.cache_data["messages"] = [
+                        msg for msg in self.cache_manager.cache_data["messages"]
+                        if msg.get("channel_id") != channel_id
+                    ]
+                    self.cache_manager.add_messages([asdict(msg) for msg in new_messages])
+                    self.cache_manager.update_channel_info(channel_id, channel_name, latest_ts)
                         
             if thread_parents_found > 0:
                 logger.info(f"#{channel_name}: Found {thread_parents_found} thread parents")
                         
         except SlackApiError as e:
             logger.error(f"Error extracting messages from channel {channel_id}: {e}")
+            # Fall back to cache if available
+            if cached_messages:
+                logger.info(f"#{channel_name}: Using cached data due to API error")
+                return cached_messages
             
+        return messages
+    
+    def _get_cached_channel_messages(self, channel_id: str) -> List[Message]:
+        """Get cached messages for a specific channel"""
+        if not self.use_cache or not self.cache_manager:
+            return []
+        
+        cached_data = self.cache_manager.get_cached_messages(channel_id)
+        messages = []
+        
+        for msg_data in cached_data:
+            try:
+                # Convert dict back to Message object
+                message = Message(
+                    id=msg_data.get("id", ""),
+                    channel_id=msg_data.get("channel_id", ""),
+                    channel_name=msg_data.get("channel_name", ""),
+                    user_id=msg_data.get("user_id", ""),
+                    username=msg_data.get("username", ""),
+                    timestamp=msg_data.get("timestamp", ""),
+                    text=msg_data.get("text", ""),
+                    message_type=msg_data.get("message_type", "message"),
+                    subtype=msg_data.get("subtype"),
+                    thread_ts=msg_data.get("thread_ts"),
+                    is_thread_parent=msg_data.get("is_thread_parent", False),
+                    reply_count=msg_data.get("reply_count", 0),
+                    reactions=msg_data.get("reactions", []),
+                    attachments=msg_data.get("attachments", [])
+                )
+                messages.append(message)
+            except Exception as e:
+                logger.warning(f"Error converting cached message: {e}")
+                continue
+        
         return messages
     
     def _extract_thread_replies(self, channel_id: str, thread_ts: str) -> List[Message]:
@@ -336,20 +436,38 @@ class SlackDataExtractor:
         return relevant_messages[:limit]
     
     def generate_llm_context(self, messages: List[Message], query: str = "", minimal: bool = True) -> str:
-        """Generate structured context for LLM processing"""
+        """Generate structured context for LLM processing with deduplication"""
+        
+        # Step 1: Remove duplicates based on message ID and text content
+        seen_messages = set()
+        unique_messages = []
+        
+        for msg in messages:
+            # Create a unique key based on message ID, text content, and timestamp
+            # This handles cases where same message might appear multiple times
+            unique_key = (msg.id, msg.text.strip(), msg.timestamp, msg.channel_id)
+            
+            if unique_key not in seen_messages:
+                seen_messages.add(unique_key)
+                unique_messages.append(msg)
+            else:
+                logger.debug(f"Removing duplicate message: {msg.text[:50]}...")
+        
+        logger.info(f"Removed {len(messages) - len(unique_messages)} duplicate messages")
+        
         context = {
             "search_query": query,
-            "total_messages": len(messages),
-            "channels_included": list(set(msg.channel_name for msg in messages)),
+            "total_messages": len(unique_messages),
+            "channels_included": list(set(msg.channel_name for msg in unique_messages)),
             "conversations": []
         }
         
         if not minimal:
-            context["date_range"] = self._get_date_range(messages)
+            context["date_range"] = self._get_date_range(unique_messages)
         
         # Group messages by channel and thread
         channel_groups: Dict[str, Dict[str, Any]] = {}
-        for msg in messages:
+        for msg in unique_messages:
             channel_key = msg.channel_name
             if channel_key not in channel_groups:
                 channel_groups[channel_key] = {"standalone": [], "threads": {}}
@@ -365,24 +483,41 @@ class SlackDataExtractor:
         
         # Format conversations for LLM
         for channel_name, channel_data in channel_groups.items():
+            # Get channel_id from any message in this channel group
+            channel_id = None
+            if channel_data["standalone"]:
+                channel_id = channel_data["standalone"][0].channel_id
+            elif channel_data["threads"]:
+                # Get from first thread message
+                first_thread_messages = list(channel_data["threads"].values())[0]
+                if first_thread_messages:
+                    channel_id = first_thread_messages[0].channel_id
+            
             channel_context = {
                 "channel": channel_name,
+                "channel_id": channel_id,
                 "standalone_messages": [],
                 "threads": []
             }
             
-            # Add standalone messages
+            # Add standalone messages (remove duplicates within channel)
+            standalone_texts = set()
             for msg in sorted(channel_data["standalone"], key=lambda x: x.timestamp):
-                msg_data = {"text": msg.text}
-                if not minimal:
-                    msg_data.update({
-                        "user": msg.username,
-                        "timestamp": self._format_timestamp(msg.timestamp),
-                        "has_thread": msg.is_thread_parent
-                    })
-                channel_context["standalone_messages"].append(msg_data)
+                # Additional deduplication within the same channel based on text content
+                if msg.text.strip() not in standalone_texts:
+                    standalone_texts.add(msg.text.strip())
+                    msg_data = {
+                        "text": msg.text,
+                        "timestamp": f"p{msg.timestamp.replace('.', '')}"
+                    }
+                    if not minimal:
+                        msg_data.update({
+                            "user": msg.username,
+                            "has_thread": msg.is_thread_parent
+                        })
+                    channel_context["standalone_messages"].append(msg_data)
             
-            # Add threads
+            # Add threads (remove duplicates within threads)
             for thread_ts, thread_messages in channel_data["threads"].items():
                 thread_context = {
                     "messages": []
@@ -390,18 +525,36 @@ class SlackDataExtractor:
                 if not minimal:
                     thread_context["thread_id"] = thread_ts
                 
+                thread_texts = set()
                 for msg in sorted(thread_messages, key=lambda x: x.timestamp):
-                    msg_data = {"text": msg.text}
-                    if not minimal:
-                        msg_data.update({
-                            "user": msg.username,
-                            "timestamp": self._format_timestamp(msg.timestamp)
-                        })
-                    thread_context["messages"].append(msg_data)
+                    # Additional deduplication within the same thread based on text content
+                    if msg.text.strip() not in thread_texts:
+                        thread_texts.add(msg.text.strip())
+                        msg_data = {
+                            "text": msg.text,
+                            "timestamp": f"p{msg.timestamp.replace('.', '')}"
+                        }
+                        if not minimal:
+                            msg_data.update({
+                                "user": msg.username
+                            })
+                        thread_context["messages"].append(msg_data)
                 
-                channel_context["threads"].append(thread_context)
+                # Only add thread if it has messages after deduplication
+                if thread_context["messages"]:
+                    channel_context["threads"].append(thread_context)
             
-            context["conversations"].append(channel_context)
+            # Only add channel if it has messages after deduplication
+            if channel_context["standalone_messages"] or channel_context["threads"]:
+                context["conversations"].append(channel_context)
+        
+        # Update total count after all deduplication
+        total_final_messages = sum(
+            len(conv["standalone_messages"]) + 
+            sum(len(thread["messages"]) for thread in conv["threads"])
+            for conv in context["conversations"]
+        )
+        context["total_messages"] = total_final_messages
         
         return json.dumps(context, indent=2)
     
@@ -465,43 +618,133 @@ class SlackDataExtractor:
         }
 
 def main():
-    """Main function to demonstrate the SlackDataExtractor"""
+    """Main function to demonstrate the SlackDataExtractor with caching"""
     token = os.environ.get("SLACK_BOT_TOKEN")
     if not token:
         logger.error("SLACK_BOT_TOKEN environment variable not set")
         return
     
-    extractor = SlackDataExtractor(token, load_users=False)  # Don't load users by default
+    extractor = SlackDataExtractor(token, load_users=False, use_cache=True)  # Enable caching
+    
+    # Show cache stats
+    if extractor.use_cache and extractor.cache_manager:
+        cache_stats = extractor.cache_manager.get_cache_stats()
+        logger.info(f"Cache stats: {cache_stats['total_messages']} messages, {cache_stats['total_channels']} channels")
+        if cache_stats['last_update']:
+            logger.info(f"Cache last updated: {cache_stats['last_update']}")
     
     # Step 1: Get users mapping (optional)
     if extractor.load_users:
         logger.info("Fetching users...")
         extractor.users = extractor.get_users()
     
-    # Step 2: Get all channels
+    # Step 2: Get all channels (use cache if available)
     logger.info("Fetching channels...")
     channels = extractor.get_all_channels()
     logger.info(f"Found {len(channels)} channels")
     
-    # Step 3: Join all available channels
+    # Step 3: Join all available channels (with rate limiting)
     logger.info("Joining channels...")
     joined = extractor.join_all_channels(channels)
     logger.info(f"Joined {len(joined)} new channels")
+    time.sleep(2)  # Wait after joining channels
     
-    # Step 4: Extract messages from all channels
+    # Step 4: Extract messages from all channels (OPTIMIZED with intelligent caching)
     logger.info("Extracting messages from all channels...")
     all_messages = []
     
+    # Get all channels that need processing
+    channels_to_process = []
     for channel in channels:
         if channel.is_member or channel.name in [c.replace('#', '') for c in joined]:
-            logger.info(f"Processing channel: #{channel.name}")
-            messages = extractor.extract_channel_messages(channel.id)
-            all_messages.extend(messages)
-            time.sleep(1)  # Rate limiting
+            channels_to_process.append(channel)
+    
+    logger.info(f"Processing {len(channels_to_process)} channels with smart caching")
+    
+    # Process channels in batches with exponential backoff
+    batch_size = 2  # Reduced to 2 channels at a time for better rate limiting
+    base_delay = 3.0  # Start with 3 seconds delay
+    max_delay = 60.0  # Maximum delay of 60 seconds
+    current_delay = base_delay
+    
+    for i in range(0, len(channels_to_process), batch_size):
+        batch = channels_to_process[i:i + batch_size]
+        logger.info(f"Processing batch {i//batch_size + 1}/{(len(channels_to_process) + batch_size - 1)//batch_size}")
+        
+        for channel in batch:
+            retry_count = 0
+            max_retries = 3
+            
+            while retry_count <= max_retries:
+                try:
+                    logger.info(f"Processing channel: #{channel.name}")
+                    # Always check for new messages, but use cache as baseline
+                    messages = extractor.extract_channel_messages(channel.id)
+                    all_messages.extend(messages)
+                    
+                    # Reset delay on success
+                    current_delay = base_delay
+                    logger.info(f"Successfully processed #{channel.name}, waiting {current_delay} seconds...")
+                    time.sleep(current_delay)
+                    break  # Success, exit retry loop
+                    
+                except SlackApiError as e:
+                    if e.response["error"] == "ratelimited":
+                        retry_count += 1
+                        # Get retry-after header if available
+                        retry_after = e.response.get("headers", {}).get("retry-after", current_delay)
+                        if isinstance(retry_after, str):
+                            try:
+                                retry_after = float(retry_after)
+                            except ValueError:
+                                retry_after = current_delay
+                        
+                        wait_time = max(retry_after, current_delay)
+                        logger.warning(f"Rate limited on #{channel.name}! Attempt {retry_count}/{max_retries}, waiting {wait_time} seconds...")
+                        time.sleep(wait_time)
+                        
+                        # Exponential backoff
+                        current_delay = min(current_delay * 2, max_delay)
+                        
+                        if retry_count > max_retries:
+                            logger.error(f"Max retries exceeded for #{channel.name}, using cached data")
+                            # Use cached data if available
+                            if extractor.use_cache and extractor.cache_manager:
+                                cached_messages = extractor._get_cached_channel_messages(channel.id)
+                                all_messages.extend(cached_messages)
+                                logger.info(f"Using cached data for #{channel.name}")
+                            break
+                    else:
+                        logger.error(f"Error processing #{channel.name}: {e}")
+                        # Use cached data if available
+                        if extractor.use_cache and extractor.cache_manager:
+                            cached_messages = extractor._get_cached_channel_messages(channel.id)
+                            all_messages.extend(cached_messages)
+                            logger.info(f"Using cached data for #{channel.name}")
+                        break
+                except Exception as e:
+                    logger.error(f"Unexpected error processing #{channel.name}: {e}")
+                    # Use cached data if available
+                    if extractor.use_cache and extractor.cache_manager:
+                        cached_messages = extractor._get_cached_channel_messages(channel.id)
+                        all_messages.extend(cached_messages)
+                        logger.info(f"Using cached data for #{channel.name}")
+                    break
+        
+        # Much longer delay between batches
+        if i + batch_size < len(channels_to_process):
+            batch_delay = max(10.0, current_delay * 2)  # At least 10 seconds between batches
+            logger.info(f"Waiting {batch_delay} seconds before next batch...")
+            time.sleep(batch_delay)
     
     logger.info(f"Extracted {len(all_messages)} total messages")
     
-    # Step 5: Filter messages (example filters)
+    # Step 5: Save cache
+    if extractor.use_cache and extractor.cache_manager:
+        extractor.cache_manager.save_cache()
+        logger.info("Cache saved successfully")
+    
+    # Step 6: Filter messages (example filters)
     filters = {
         "exclude_bots": True,
         "start_date": datetime.now() - timedelta(days=30),  # Last 30 days
@@ -512,21 +755,22 @@ def main():
     filtered_messages = extractor.filter_messages(all_messages, filters)
     logger.info(f"Filtered to {len(filtered_messages)} relevant messages")
     
-    # Step 6: Generate LLM context
+    # Step 7: Generate LLM context
     logger.info("Generating LLM context...")
     llm_context = extractor.generate_llm_context(filtered_messages, "", minimal=True)
     
-    # Step 7: Save results
+    # Step 8: Save results
     with open("slack_data.json", "w") as f:
         f.write(llm_context)
     
     logger.info("Data extraction complete!")
     logger.info(f"LLM context saved to slack_data.json")
     
-    # Example search
-    search_query = "deployment issue"
-    search_results = extractor.search_messages(search_query, filtered_messages, limit=20)
-    logger.info(f"Search for '{search_query}' returned {len(search_results)} results")
+    # Show final cache stats
+    if extractor.use_cache and extractor.cache_manager:
+        final_stats = extractor.cache_manager.get_cache_stats()
+        logger.info(f"Final cache: {final_stats['total_messages']} messages, cache size: {final_stats['cache_file_size']} bytes")
+
 
 if __name__ == "__main__":
     main()
