@@ -624,6 +624,9 @@ def main():
         logger.error("SLACK_BOT_TOKEN environment variable not set")
         return
     
+    # Add cache-only mode option
+    cache_only = os.environ.get("CACHE_ONLY", "false").lower() == "true"
+    
     extractor = SlackDataExtractor(token, load_users=False, use_cache=True)  # Enable caching
     
     # Show cache stats
@@ -633,23 +636,56 @@ def main():
         if cache_stats['last_update']:
             logger.info(f"Cache last updated: {cache_stats['last_update']}")
     
-    # Step 1: Get users mapping (optional)
-    if extractor.load_users:
-        logger.info("Fetching users...")
-        extractor.users = extractor.get_users()
+    if cache_only:
+        logger.info("CACHE-ONLY MODE: Working entirely from cache, no API calls")
+        # Get all messages from cache
+        all_messages = []
+        if extractor.use_cache and extractor.cache_manager:
+            cached_messages = extractor.cache_manager.get_cached_messages()
+            for msg_data in cached_messages:
+                try:
+                    message = Message(
+                        id=msg_data.get("id", ""),
+                        channel_id=msg_data.get("channel_id", ""),
+                        channel_name=msg_data.get("channel_name", ""),
+                        user_id=msg_data.get("user_id", ""),
+                        username=msg_data.get("username", ""),
+                        timestamp=msg_data.get("timestamp", ""),
+                        text=msg_data.get("text", ""),
+                        message_type=msg_data.get("message_type", "message"),
+                        subtype=msg_data.get("subtype"),
+                        thread_ts=msg_data.get("thread_ts"),
+                        is_thread_parent=msg_data.get("is_thread_parent", False),
+                        reply_count=msg_data.get("reply_count", 0),
+                        reactions=msg_data.get("reactions", []),
+                        attachments=msg_data.get("attachments", [])
+                    )
+                    all_messages.append(message)
+                except Exception as e:
+                    logger.warning(f"Error converting cached message: {e}")
+                    continue
+        
+        logger.info(f"Loaded {len(all_messages)} messages from cache")
+        
+    else:
+        # Regular mode with API calls
+        # Step 1: Get users mapping (optional)
+        if extractor.load_users:
+            logger.info("Fetching users...")
+            extractor.users = extractor.get_users()
+        
+        # Step 2: Get all channels (use cache if available)
+        logger.info("Fetching channels...")
+        channels = extractor.get_all_channels()
+        logger.info(f"Found {len(channels)} channels")
+        
+        # Step 3: Join all available channels (with rate limiting)
+        logger.info("Joining channels...")
+        joined = extractor.join_all_channels(channels)
+        logger.info(f"Joined {len(joined)} new channels")
+        time.sleep(2)  # Wait after joining channels
     
-    # Step 2: Get all channels (use cache if available)
-    logger.info("Fetching channels...")
-    channels = extractor.get_all_channels()
-    logger.info(f"Found {len(channels)} channels")
-    
-    # Step 3: Join all available channels (with rate limiting)
-    logger.info("Joining channels...")
-    joined = extractor.join_all_channels(channels)
-    logger.info(f"Joined {len(joined)} new channels")
-    time.sleep(2)  # Wait after joining channels
-    
-    # Step 4: Extract messages from all channels (OPTIMIZED with intelligent caching)
+    # Step 4: Extract messages from all channels (ULTRA-CONSERVATIVE with smart caching)
     logger.info("Extracting messages from all channels...")
     all_messages = []
     
@@ -659,83 +695,87 @@ def main():
         if channel.is_member or channel.name in [c.replace('#', '') for c in joined]:
             channels_to_process.append(channel)
     
-    logger.info(f"Processing {len(channels_to_process)} channels with smart caching")
+    logger.info(f"Processing {len(channels_to_process)} channels with ultra-conservative rate limiting")
     
-    # Process channels in batches with exponential backoff
-    batch_size = 2  # Reduced to 2 channels at a time for better rate limiting
-    base_delay = 3.0  # Start with 3 seconds delay
-    max_delay = 60.0  # Maximum delay of 60 seconds
+    # Ultra-conservative settings
+    base_delay = 10.0  # 10 seconds between channels
+    max_delay = 120.0  # Maximum delay of 2 minutes
     current_delay = base_delay
     
-    for i in range(0, len(channels_to_process), batch_size):
-        batch = channels_to_process[i:i + batch_size]
-        logger.info(f"Processing batch {i//batch_size + 1}/{(len(channels_to_process) + batch_size - 1)//batch_size}")
+    # Process channels ONE AT A TIME with long delays
+    for i, channel in enumerate(channels_to_process):
+        logger.info(f"Processing channel {i+1}/{len(channels_to_process)}: #{channel.name}")
         
-        for channel in batch:
-            retry_count = 0
-            max_retries = 3
-            
-            while retry_count <= max_retries:
-                try:
-                    logger.info(f"Processing channel: #{channel.name}")
-                    # Always check for new messages, but use cache as baseline
-                    messages = extractor.extract_channel_messages(channel.id)
-                    all_messages.extend(messages)
-                    
-                    # Reset delay on success
-                    current_delay = base_delay
-                    logger.info(f"Successfully processed #{channel.name}, waiting {current_delay} seconds...")
-                    time.sleep(current_delay)
-                    break  # Success, exit retry loop
-                    
-                except SlackApiError as e:
-                    if e.response["error"] == "ratelimited":
-                        retry_count += 1
-                        # Get retry-after header if available
-                        retry_after = e.response.get("headers", {}).get("retry-after", current_delay)
-                        if isinstance(retry_after, str):
-                            try:
-                                retry_after = float(retry_after)
-                            except ValueError:
-                                retry_after = current_delay
-                        
-                        wait_time = max(retry_after, current_delay)
-                        logger.warning(f"Rate limited on #{channel.name}! Attempt {retry_count}/{max_retries}, waiting {wait_time} seconds...")
-                        time.sleep(wait_time)
-                        
-                        # Exponential backoff
-                        current_delay = min(current_delay * 2, max_delay)
-                        
-                        if retry_count > max_retries:
-                            logger.error(f"Max retries exceeded for #{channel.name}, using cached data")
-                            # Use cached data if available
-                            if extractor.use_cache and extractor.cache_manager:
-                                cached_messages = extractor._get_cached_channel_messages(channel.id)
-                                all_messages.extend(cached_messages)
-                                logger.info(f"Using cached data for #{channel.name}")
-                            break
-                    else:
-                        logger.error(f"Error processing #{channel.name}: {e}")
-                        # Use cached data if available
-                        if extractor.use_cache and extractor.cache_manager:
+        retry_count = 0
+        max_retries = 2  # Reduced retries to avoid hitting limits
+        success = False
+        
+        while retry_count <= max_retries and not success:
+            try:
+                # Check if we can use cache (very recent data)
+                if extractor.use_cache and extractor.cache_manager:
+                    # Use cache if it's very recent (last 10 minutes)
+                    last_fetch = extractor.cache_manager.get_channel_last_fetch(channel.id)
+                    if last_fetch:
+                        from datetime import datetime, timedelta
+                        last_fetch_time = datetime.fromisoformat(last_fetch)
+                        if datetime.now() - last_fetch_time < timedelta(minutes=10):
+                            logger.info(f"#{channel.name}: Using very recent cache (< 10 min old)")
                             cached_messages = extractor._get_cached_channel_messages(channel.id)
                             all_messages.extend(cached_messages)
-                            logger.info(f"Using cached data for #{channel.name}")
-                        break
-                except Exception as e:
-                    logger.error(f"Unexpected error processing #{channel.name}: {e}")
-                    # Use cached data if available
-                    if extractor.use_cache and extractor.cache_manager:
-                        cached_messages = extractor._get_cached_channel_messages(channel.id)
-                        all_messages.extend(cached_messages)
-                        logger.info(f"Using cached data for #{channel.name}")
+                            success = True
+                            continue
+                
+                logger.info(f"#{channel.name}: Fetching from API (attempt {retry_count + 1})")
+                messages = extractor.extract_channel_messages(channel.id)
+                all_messages.extend(messages)
+                success = True
+                
+                # Reset delay on success
+                current_delay = base_delay
+                logger.info(f"#{channel.name}: Successfully processed, waiting {current_delay} seconds...")
+                
+            except SlackApiError as e:
+                if e.response["error"] == "ratelimited":
+                    retry_count += 1
+                    
+                    # Get retry-after header if available
+                    retry_after = e.response.get("headers", {}).get("retry-after", current_delay)
+                    if isinstance(retry_after, str):
+                        try:
+                            retry_after = float(retry_after)
+                        except ValueError:
+                            retry_after = current_delay
+                    
+                    # Use much longer wait time
+                    wait_time = max(retry_after * 2, current_delay * 2)  # Double the suggested wait time
+                    logger.warning(f"#{channel.name}: Rate limited! Attempt {retry_count}/{max_retries}, waiting {wait_time:.1f} seconds...")
+                    time.sleep(wait_time)
+                    
+                    # Exponential backoff
+                    current_delay = min(current_delay * 2, max_delay)
+                    
+                else:
+                    logger.error(f"#{channel.name}: API error: {e}")
                     break
+                    
+            except Exception as e:
+                logger.error(f"#{channel.name}: Unexpected error: {e}")
+                break
         
-        # Much longer delay between batches
-        if i + batch_size < len(channels_to_process):
-            batch_delay = max(10.0, current_delay * 2)  # At least 10 seconds between batches
-            logger.info(f"Waiting {batch_delay} seconds before next batch...")
-            time.sleep(batch_delay)
+        # If we failed to get new data, use cache
+        if not success:
+            logger.warning(f"#{channel.name}: Failed to fetch new data, using cached data")
+            if extractor.use_cache and extractor.cache_manager:
+                cached_messages = extractor._get_cached_channel_messages(channel.id)
+                all_messages.extend(cached_messages)
+                logger.info(f"#{channel.name}: Using cached data ({len(cached_messages)} messages)")
+        
+        # Long delay between channels (except for the last one)
+        if i < len(channels_to_process) - 1:
+            delay = max(current_delay, 15.0)  # At least 15 seconds between channels
+            logger.info(f"Waiting {delay:.1f} seconds before next channel...")
+            time.sleep(delay)
     
     logger.info(f"Extracted {len(all_messages)} total messages")
     
@@ -743,6 +783,35 @@ def main():
     if extractor.use_cache and extractor.cache_manager:
         extractor.cache_manager.save_cache()
         logger.info("Cache saved successfully")
+        
+        # Step 5.5: Reload all messages from cache to ensure we have the most complete data
+        logger.info("Reloading all messages from updated cache...")
+        all_messages = []
+        cached_messages = extractor.cache_manager.get_cached_messages()
+        for msg_data in cached_messages:
+            try:
+                message = Message(
+                    id=msg_data.get("id", ""),
+                    channel_id=msg_data.get("channel_id", ""),
+                    channel_name=msg_data.get("channel_name", ""),
+                    user_id=msg_data.get("user_id", ""),
+                    username=msg_data.get("username", ""),
+                    timestamp=msg_data.get("timestamp", ""),
+                    text=msg_data.get("text", ""),
+                    message_type=msg_data.get("message_type", "message"),
+                    subtype=msg_data.get("subtype"),
+                    thread_ts=msg_data.get("thread_ts"),
+                    is_thread_parent=msg_data.get("is_thread_parent", False),
+                    reply_count=msg_data.get("reply_count", 0),
+                    reactions=msg_data.get("reactions", []),
+                    attachments=msg_data.get("attachments", [])
+                )
+                all_messages.append(message)
+            except Exception as e:
+                logger.warning(f"Error converting cached message: {e}")
+                continue
+        
+        logger.info(f"Reloaded {len(all_messages)} messages from cache")
     
     # Step 6: Filter messages (example filters)
     filters = {
@@ -755,8 +824,8 @@ def main():
     filtered_messages = extractor.filter_messages(all_messages, filters)
     logger.info(f"Filtered to {len(filtered_messages)} relevant messages")
     
-    # Step 7: Generate LLM context
-    logger.info("Generating LLM context...")
+    # Step 7: Generate LLM context from latest cache data
+    logger.info("Generating LLM context from latest cache data...")
     llm_context = extractor.generate_llm_context(filtered_messages, "", minimal=True)
     
     # Step 8: Save results
@@ -764,7 +833,7 @@ def main():
         f.write(llm_context)
     
     logger.info("Data extraction complete!")
-    logger.info(f"LLM context saved to slack_data.json")
+    logger.info(f"LLM context saved to slack_data.json (from latest cache)")
     
     # Show final cache stats
     if extractor.use_cache and extractor.cache_manager:
